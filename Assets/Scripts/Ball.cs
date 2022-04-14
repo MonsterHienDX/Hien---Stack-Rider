@@ -29,4 +29,9 @@ public class Ball : MonoBehaviour
             speed = 0;
         }
     }
+
+    public void DragLeftRight(float xPos)
+    {
+        this.transform.position = new Vector3(xPos, transform.position.y, transform.position.z);
+    }
 }
