@@ -5,9 +5,8 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    public float height = 12.5f;
     void LateUpdate()
     {
-        this.transform.LookAt(player);
+        this.transform.position = new Vector3(transform.position.x, transform.position.y, player.transform.position.z + 12);
     }
 }
