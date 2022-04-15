@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Ball playerBall;
+    public PlayerBall playerBall;
     public TutorialManager tutorialManager;
 
     public static GameManager instance;

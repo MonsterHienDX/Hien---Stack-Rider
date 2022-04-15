@@ -25,7 +25,6 @@ public class DragToRide : MonoBehaviour
             if (screenTouch.phase == TouchPhase.Ended)
             {
                 // isActive = false;
-                Debug.Log("Player end touch");
             }
         }
     }

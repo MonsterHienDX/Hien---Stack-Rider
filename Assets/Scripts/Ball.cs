@@ -4,34 +4,9 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private Transform endPointTransform;
+    public bool isCollected;
 
-    public float speed;
+    private SphereCollider sphereCollider;
 
-    void Start()
-    {
-        speed = 0;
-    }
-
-    public void StartPlay()
-    {
-        speed = 0.3f;
-    }
-
-    void Update()
-    {
-        if (transform.position.z > endPointTransform.position.z)
-        {
-            transform.Translate(endPointTransform.position * Time.deltaTime * speed);
-        }
-        else
-        {
-            speed = 0;
-        }
-    }
-
-    public void DragLeftRight(float xPos)
-    {
-        this.transform.position = new Vector3(xPos, transform.position.y, transform.position.z);
-    }
+    private Animator animator;
 }
