@@ -9,12 +9,13 @@ public class PlayerBall : MonoBehaviour
     [SerializeField] private Transform mapBallContainer;
     public float canConfigSpeed;
     private float speed;
-
+    public bool isLose;
     private SphereCollider sphereCollider;
 
     public Stack<Ball> ballsCollected;
     void Start()
     {
+        isLose = false;
         speed = 0;
         ballsCollected = new Stack<Ball>();
         sphereCollider = GetComponent<SphereCollider>();
@@ -27,7 +28,7 @@ public class PlayerBall : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.z > endPoint.position.z)
+        if (transform.position.z > endPoint.position.z && !isLose)
         {
             transform.Translate(endPoint.position * Time.deltaTime * speed);
         }
@@ -61,7 +62,9 @@ public class PlayerBall : MonoBehaviour
             }
             else
             {
-                speed = 0;
+
+                isLose = true;
+                Debug.LogWarning("isLose: " + isLose);
             }
         }
     }
