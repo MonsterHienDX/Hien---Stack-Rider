@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        Application.targetFrameRate = 60;
         LoadLevel();
     }
 
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     public void BallMoveLeftRight(float xPos)
     {
-        playerBall.DragLeftRight(xPos);
+        playerBall.DragLeftRight(-xPos);
     }
 
     public void LoadLevel()

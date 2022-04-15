@@ -6,11 +6,19 @@ using UnityEngine.UI;
 public class DragToRide : MonoBehaviour
 {
     private Slider rider;
-    void Start()
+    void Awake()
     {
         rider = GetComponent<Slider>();
     }
 
+    private void OnEnable()
+    {
+        rider.onValueChanged.AddListener(GameManager.instance.BallMoveLeftRight);
+    }
+    private void OnDisable()
+    {
+        rider.onValueChanged.RemoveListener(GameManager.instance.BallMoveLeftRight);
+    }
     void Update()
     {
         if (Input.touchCount == 1)
@@ -20,7 +28,7 @@ public class DragToRide : MonoBehaviour
             if (screenTouch.phase == TouchPhase.Moved)
             {
                 rider.value += screenTouch.deltaPosition.x / 100;
-                GameManager.instance.BallMoveLeftRight(-rider.value);
+                GameManager.instance.BallMoveLeftRight(rider.value);
             }
             if (screenTouch.phase == TouchPhase.Ended)
             {
@@ -28,4 +36,7 @@ public class DragToRide : MonoBehaviour
             }
         }
     }
+
+
+
 }

@@ -12,6 +12,8 @@ public class PlayerBall : MonoBehaviour
     public bool isLose;
     private SphereCollider sphereCollider;
 
+    private int coinInLevel;
+
     public Stack<Ball> ballsCollected;
     void Start()
     {
@@ -34,6 +36,7 @@ public class PlayerBall : MonoBehaviour
         }
         else
         {
+            WinLevel();
             speed = 0;
         }
     }
@@ -62,10 +65,16 @@ public class PlayerBall : MonoBehaviour
             }
             else
             {
-
-                isLose = true;
+                LoseLevel();
                 Debug.LogWarning("isLose: " + isLose);
             }
+        }
+
+        else if (coll.gameObject.tag == "Coin")
+        {
+            Coin coin = coll.gameObject.GetComponent<Coin>();
+            CollectCoin(coin.coinAmount);
+            coll.gameObject.SetActive(false);
         }
     }
 
@@ -96,6 +105,28 @@ public class PlayerBall : MonoBehaviour
 
         // transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
         // sphereCollider.center = new Vector3(sphereCollider.center.x, sphereCollider.center.y + 1, sphereCollider.center.z);
+    }
+
+    public void CollectCoin(int amount)
+    {
+        coinInLevel += amount;
+        Debug.Log("coinInLevel: " + coinInLevel);
+    }
+
+    public void WinLevel()
+    {
+        if (PlayerPrefs.HasKey(StringConstant.KEY_SAVE_COIN))
+            PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, PlayerPrefs.GetInt(StringConstant.KEY_SAVE_COIN) + coinInLevel);
+        else
+        {
+            PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, coinInLevel);
+        }
+
+    }
+
+    public void LoseLevel()
+    {
+        isLose = true;
     }
 
 }
