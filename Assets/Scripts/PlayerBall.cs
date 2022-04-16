@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBall : MonoBehaviour
 {
-    [SerializeField] private Transform endPoint;
+    public Transform endPoint;
     [SerializeField] private Transform ballsContainer;
     [SerializeField] private Transform mapBallContainer;
     public float canConfigSpeed;
@@ -13,19 +13,10 @@ public class PlayerBall : MonoBehaviour
     public int coinInLevel;
     public bool isStop;
     public Stack<Ball> ballsCollected;
-
     public static PlayerBall instance;
     private void Awake()
     {
         instance = this;
-    }
-    private void OnEnable()
-    {
-    }
-
-    private void OnDisable()
-    {
-
     }
 
     void Start()
@@ -52,6 +43,25 @@ public class PlayerBall : MonoBehaviour
             GameManager.instance.EndLevel(true);
         }
     }
+
+    public void Init(LevelInfo levelInfo)
+    {
+        StopMove();
+        ballsCollected = new Stack<Ball>();
+        // ballsCollected.Clear();
+        if (ballsContainer.transform.childCount > 0)
+        {
+            for (int i = 0; i < ballsContainer.transform.childCount; i++)
+            {
+                Destroy(ballsContainer.transform.GetChild(i).gameObject);
+            }
+        }
+
+        this.transform.position = levelInfo.startPoint.position;
+        this.endPoint = levelInfo.endPoint;
+        this.mapBallContainer = levelInfo.mapBallManager;
+    }
+
 
     public void DragLeftRight(float xPos)
     {
@@ -103,7 +113,35 @@ public class PlayerBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider coll)
     {
-        if (coll.gameObject.tag == "Lava")
+        if (coll.gameObject.tag == "Ball")
+        {
+            Ball ballCollision = coll.gameObject.GetComponent<Ball>();
+            if (!ballCollision.isCollected)
+                CollectBall(ballCollision);
+        }
+
+        else if (coll.gameObject.tag == "Wall")
+        {
+            Wall wallCollision = coll.gameObject.GetComponent<Wall>();
+            if (ballsCollected.Count > 0 && !wallCollision.isCollided)
+            {
+                LoseBall();
+                wallCollision.isCollided = true;
+            }
+            else
+            {
+                GameManager.instance.EndLevel(false);
+            }
+        }
+
+        else if (coll.gameObject.tag == "Coin")
+        {
+            Coin coin = coll.gameObject.GetComponent<Coin>();
+            CollectCoin(coin.coinAmount);
+            coll.gameObject.SetActive(false);
+        }
+
+        else if (coll.gameObject.tag == "Lava")
         {
             if (ballsCollected.Count > 0)
             {
@@ -125,6 +163,7 @@ public class PlayerBall : MonoBehaviour
         // sphereCollider.center = new Vector3(sphereCollider.center.x, sphereCollider.center.y - 1, sphereCollider.center.z);
 
         newBall.isCollected = true;
+
         if (ballsCollected.Count < 1)
         {
             newBall.transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
@@ -159,6 +198,8 @@ public class PlayerBall : MonoBehaviour
     public void CollectCoin(int amount)
     {
         coinInLevel += amount;
+        EventDispatcher.Instance.PostEvent(EventID.UpdateCoin, coinInLevel);
+        Debug.Log("Collect Coin: " + amount);
     }
 
     public void StopMove()

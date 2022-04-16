@@ -9,8 +9,13 @@ public class GameManager : MonoBehaviour
     public TutorialManager tutorialManager;
     public bool isLose;
     public static GameManager instance;
-
     public bool isGamePlaying = true;
+    public List<GameObject> levelPrefabs;
+    [SerializeField] Transform levelRoot;
+    private GameObject currentLevel;
+
+    public int levelNumber;
+
     private void Awake()
     {
         instance = this;
@@ -19,17 +24,17 @@ public class GameManager : MonoBehaviour
     {
         isLose = false;
         Application.targetFrameRate = 60;
+        levelNumber = GetLevelNumber();
         LoadLevel();
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && isGamePlaying)
+        if (Input.GetMouseButtonDown(0) && !isGamePlaying)
         {
-            isGamePlaying = false;
+            isGamePlaying = true;
             tutorialManager.EnableTutorial(false);
             playerBall.StartPlay();
-
         }
     }
 
@@ -41,20 +46,56 @@ public class GameManager : MonoBehaviour
     public void LoadLevel()
     {
         tutorialManager.EnableTutorial(true);
-    }
-    public void EndLevel(bool win)
-    {
-        EventDispatcher.Instance.PostEvent(EventID.EndLevel, win);
-        playerBall.StopMove();
+        isLose = false;
+        isGamePlaying = false;
+        if (levelRoot.childCount > 0)
+            Destroy(levelRoot.GetChild(0).gameObject);
 
-        if (win)
+
+        if (levelNumber < levelPrefabs.Count)
+            currentLevel = Instantiate<GameObject>(levelPrefabs[levelNumber], levelRoot);
+        else
         {
-            if (PlayerPrefs.HasKey(StringConstant.KEY_SAVE_COIN))
-                PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, PlayerPrefs.GetInt(StringConstant.KEY_SAVE_COIN) + playerBall.coinInLevel);
-            else
-            {
-                PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, playerBall.coinInLevel);
-            }
+            currentLevel = Instantiate<GameObject>(levelPrefabs[UnityEngine.Random.Range(0, levelPrefabs.Count)], levelRoot);
+        }
+
+        currentLevel.transform.SetParent(levelRoot);
+
+        LevelInfo levelInfo = currentLevel.GetComponent<LevelInfo>();
+
+        Debug.Log("Level name: " + currentLevel.name);
+
+        playerBall.Init(levelInfo);
+    }
+
+    private int GetLevelNumber()
+    {
+        if (PlayerPrefs.HasKey(StringConstant.KEY_LEVEL))
+        {
+            return PlayerPrefs.GetInt(StringConstant.KEY_LEVEL, 0);
+        }
+        else
+        {
+            PlayerPrefs.SetInt(StringConstant.KEY_LEVEL, 1);
+            return 1;
+        }
+    }
+
+    // Set level number
+    public void SetLevelNumber(int level)
+    {
+        PlayerPrefs.SetInt(StringConstant.KEY_LEVEL, level);
+    }
+
+    public void EndLevel(bool isWin)
+    {
+        EventDispatcher.Instance.PostEvent(EventID.EndLevel, isWin);
+        playerBall.StopMove();
+        currentLevel = null;
+        if (isWin)
+        {
+            IncreaseCoin();
+            NextLevel();
         }
         else
         {
@@ -63,5 +104,21 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private void IncreaseCoin()
+    {
+        if (PlayerPrefs.HasKey(StringConstant.KEY_SAVE_COIN))
+            PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, PlayerPrefs.GetInt(StringConstant.KEY_SAVE_COIN) + playerBall.coinInLevel);
+        else
+        {
+            PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, playerBall.coinInLevel);
+        }
+    }
+
+    private void NextLevel()
+    {
+        levelNumber += 1;
+        SetLevelNumber(levelNumber);
+        LoadLevel();
+    }
 
 }

@@ -8,4 +8,6 @@ public enum EventID
     SetBackGround,
     ShowToast,
     NextLevel,
+    UpdateCoin,
+
 }
