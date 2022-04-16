@@ -7,25 +7,29 @@ public class GameManager : MonoBehaviour
 {
     public PlayerBall playerBall;
     public TutorialManager tutorialManager;
-
+    public bool isLose;
     public static GameManager instance;
 
+    public bool isGamePlaying = true;
     private void Awake()
     {
         instance = this;
     }
     private void Start()
     {
+        isLose = false;
         Application.targetFrameRate = 60;
         LoadLevel();
     }
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0) && isGamePlaying)
         {
+            isGamePlaying = false;
             tutorialManager.EnableTutorial(false);
             playerBall.StartPlay();
+
         }
     }
 
@@ -38,5 +42,27 @@ public class GameManager : MonoBehaviour
     {
         tutorialManager.EnableTutorial(true);
     }
+    public void EndLevel(bool win)
+    {
+        Debug.LogWarning("Player win: " + win);
+        EventDispatcher.Instance.PostEvent(EventID.EndLevel, win);
+        playerBall.StopMove();
+
+        if (win)
+        {
+            if (PlayerPrefs.HasKey(StringConstant.KEY_SAVE_COIN))
+                PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, PlayerPrefs.GetInt(StringConstant.KEY_SAVE_COIN) + playerBall.coinInLevel);
+            else
+            {
+                PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, playerBall.coinInLevel);
+            }
+        }
+        else
+        {
+
+        }
+
+    }
+
 
 }

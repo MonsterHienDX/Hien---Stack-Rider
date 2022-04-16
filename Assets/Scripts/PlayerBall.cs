@@ -9,35 +9,42 @@ public class PlayerBall : MonoBehaviour
     [SerializeField] private Transform mapBallContainer;
     public float canConfigSpeed;
     private float speed;
-    public bool isLose;
     private SphereCollider sphereCollider;
-
-    private int coinInLevel;
-
+    public int coinInLevel;
+    public bool isStop;
     public Stack<Ball> ballsCollected;
+
+    private void OnEnable()
+    {
+    }
+
+    private void OnDisable()
+    {
+
+    }
+
     void Start()
     {
-        isLose = false;
-        speed = 0;
+        StopMove();
         ballsCollected = new Stack<Ball>();
         sphereCollider = GetComponent<SphereCollider>();
     }
 
     public void StartPlay()
     {
-        speed = canConfigSpeed;
+        StartMove();
     }
 
     void Update()
     {
-        if (transform.position.z > endPoint.position.z && !isLose)
+        if (isStop) return;
+        if (transform.position.z > endPoint.position.z)
         {
             transform.Translate(endPoint.position * Time.deltaTime * speed);
         }
         else
         {
-            WinLevel();
-            speed = 0;
+            GameManager.instance.EndLevel(true);
         }
     }
 
@@ -65,8 +72,7 @@ public class PlayerBall : MonoBehaviour
             }
             else
             {
-                LoseLevel();
-                Debug.LogWarning("isLose: " + isLose);
+                GameManager.instance.EndLevel(false);
             }
         }
 
@@ -105,6 +111,7 @@ public class PlayerBall : MonoBehaviour
 
         // transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
         // sphereCollider.center = new Vector3(sphereCollider.center.x, sphereCollider.center.y + 1, sphereCollider.center.z);
+        Debug.Log("Ball remaining: " + ballsCollected.Count);
     }
 
     public void CollectCoin(int amount)
@@ -113,20 +120,16 @@ public class PlayerBall : MonoBehaviour
         Debug.Log("coinInLevel: " + coinInLevel);
     }
 
-    public void WinLevel()
+    public void StopMove()
     {
-        if (PlayerPrefs.HasKey(StringConstant.KEY_SAVE_COIN))
-            PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, PlayerPrefs.GetInt(StringConstant.KEY_SAVE_COIN) + coinInLevel);
-        else
-        {
-            PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, coinInLevel);
-        }
-
+        this.speed = 0;
+        isStop = true;
+        Debug.Log("Speed: " + speed);
     }
 
-    public void LoseLevel()
+    public void StartMove()
     {
-        isLose = true;
+        this.speed = canConfigSpeed;
+        isStop = false;
     }
-
 }
