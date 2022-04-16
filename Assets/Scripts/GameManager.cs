@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
     }
     public void EndLevel(bool win)
     {
-        Debug.LogWarning("Player win: " + win);
         EventDispatcher.Instance.PostEvent(EventID.EndLevel, win);
         playerBall.StopMove();
 

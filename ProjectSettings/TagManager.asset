@@ -9,6 +9,7 @@ TagManager:
   - Ball
   - Wall
   - Coin
+  - Lava
   layers:
   - Default
   - TransparentFX

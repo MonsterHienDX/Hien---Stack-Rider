@@ -14,6 +14,11 @@ public class PlayerBall : MonoBehaviour
     public bool isStop;
     public Stack<Ball> ballsCollected;
 
+    public static PlayerBall instance;
+    private void Awake()
+    {
+        instance = this;
+    }
     private void OnEnable()
     {
     }
@@ -82,6 +87,33 @@ public class PlayerBall : MonoBehaviour
             CollectCoin(coin.coinAmount);
             coll.gameObject.SetActive(false);
         }
+
+        else if (coll.gameObject.tag == "Lava")
+        {
+            if (ballsCollected.Count > 0)
+            {
+                LoseBallByLava();
+            }
+            else
+            {
+                GameManager.instance.EndLevel(false);
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.tag == "Lava")
+        {
+            if (ballsCollected.Count > 0)
+            {
+                LoseBallByLava();
+            }
+            else
+            {
+                GameManager.instance.EndLevel(false);
+            }
+        }
     }
 
     public void CollectBall(Ball newBall)
@@ -104,27 +136,35 @@ public class PlayerBall : MonoBehaviour
         newBall.transform.SetParent(ballsContainer);
     }
 
-    public void LoseBall()
+    private Ball LoseBall()
     {
         Ball ballLose = ballsCollected.Pop();
         ballLose.transform.SetParent(mapBallContainer);
+        return ballLose;
 
-        // transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
-        // sphereCollider.center = new Vector3(sphereCollider.center.x, sphereCollider.center.y + 1, sphereCollider.center.z);
-        Debug.Log("Ball remaining: " + ballsCollected.Count);
+    }
+    public void LoseBallByWall()
+    {
+        LoseBall();
+    }
+
+    public void LoseBallByLava()
+    {
+        Debug.LogWarning("LoseBallByLava");
+        Destroy(LoseBall().gameObject);
+        // Play FX ball destroy by lava
+
     }
 
     public void CollectCoin(int amount)
     {
         coinInLevel += amount;
-        Debug.Log("coinInLevel: " + coinInLevel);
     }
 
     public void StopMove()
     {
         this.speed = 0;
         isStop = true;
-        Debug.Log("Speed: " + speed);
     }
 
     public void StartMove()
