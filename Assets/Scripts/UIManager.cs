@@ -21,13 +21,13 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         EventDispatcher.Instance.RegisterListener(EventID.UpdateCoin, UpdateCoinUI);
-        EventDispatcher.Instance.RegisterListener(EventID.EndLevel, UpdateLevelUI);
+        EventDispatcher.Instance.RegisterListener(EventID.LoadLevel, UpdateLevelUI);
     }
 
     private void OnDisable()
     {
         EventDispatcher.Instance.RemoveListener(EventID.UpdateCoin, UpdateCoinUI);
-        EventDispatcher.Instance.RemoveListener(EventID.EndLevel, UpdateLevelUI);
+        EventDispatcher.Instance.RemoveListener(EventID.LoadLevel, UpdateLevelUI);
     }
 
     private void Start()
@@ -49,15 +49,9 @@ public class UIManager : MonoBehaviour
 
     private void UpdateLevelUI(object param = null)
     {
-        bool win = (bool)param;
-        if (win)
-        {
-            string nText = $"Level: {currentLevel + 1}";
-        }
-        else
-        {
-
-        }
+        currentLevel = (int)param;
+        string nText = $"Level: {currentLevel}";
+        LevelText.text = nText;
     }
 
 }

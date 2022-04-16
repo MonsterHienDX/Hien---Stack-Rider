@@ -63,9 +63,10 @@ public class GameManager : MonoBehaviour
 
         LevelInfo levelInfo = currentLevel.GetComponent<LevelInfo>();
 
-        Debug.Log("Level name: " + currentLevel.name);
-
         playerBall.Init(levelInfo);
+
+        EventDispatcher.Instance.PostEvent(EventID.LoadLevel, levelNumber);
+
     }
 
     private int GetLevelNumber()

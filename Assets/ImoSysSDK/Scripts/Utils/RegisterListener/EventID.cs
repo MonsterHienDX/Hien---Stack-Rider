@@ -10,4 +10,5 @@ public enum EventID
     NextLevel,
     UpdateCoin,
 
+    LoadLevel,
 }
