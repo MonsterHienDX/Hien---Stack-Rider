@@ -57,6 +57,8 @@ public class PlayerBall : MonoBehaviour
             }
         }
 
+        this.coinInLevel = 0;
+
         this.transform.position = levelInfo.startPoint.position;
         this.endPoint = levelInfo.endPoint;
         this.mapBallContainer = levelInfo.mapBallManager;
@@ -191,6 +193,7 @@ public class PlayerBall : MonoBehaviour
     {
         Debug.LogWarning("LoseBallByLava");
         Destroy(LoseBall().gameObject);
+
         // Play FX ball destroy by lava
 
     }
@@ -199,7 +202,6 @@ public class PlayerBall : MonoBehaviour
     {
         coinInLevel += amount;
         EventDispatcher.Instance.PostEvent(EventID.UpdateCoin, coinInLevel);
-        Debug.Log("Collect Coin: " + amount);
     }
 
     public void StopMove()

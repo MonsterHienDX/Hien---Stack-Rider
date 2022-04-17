@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
+            LoadLevel();
         }
 
     }
