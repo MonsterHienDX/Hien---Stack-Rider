@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         isLose = false;
-        Application.targetFrameRate = 60;
+        SetFPS(Constant.FPS);
         levelNumber = GetLevelNumber();
         LoadLevel();
     }
@@ -102,10 +102,13 @@ public class GameManager : MonoBehaviour
         _endGamePanelManager.ShowPopup(isWin);
         if (isWin)
         {
+
+            Vibrator.Vibrate(Constant.STRONG_VIBRATE);
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.WIN);
         }
         else
         {
+            Vibrator.Vibrate(Constant.WEAK_VIBRATE);
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.LOSE);
         }
     }
@@ -131,6 +134,11 @@ public class GameManager : MonoBehaviour
     public int GetPlayerCoin()
     {
         return PlayerPrefs.GetInt(Constant.KEY_SAVE_COIN);
+    }
+
+    private void SetFPS(int fps)
+    {
+        Application.targetFrameRate = fps;
     }
 
 }

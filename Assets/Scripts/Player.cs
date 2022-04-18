@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
     private void UpdateAnimState(object param = null)
     {
         int state = (int)param;
-        Debug.Log("char state: " + state);
         animator.SetInteger("characterState", state);
     }
 

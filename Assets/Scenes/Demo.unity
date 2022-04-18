@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fbd8f6e109392f44936daec5b6cca4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityScale: 1
+  gravityScale: 2
 --- !u!114 &824958391 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3250588538630152092, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
@@ -4414,7 +4414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538630152092, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: ballRotateRateSpeed
-      value: 70
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538630152093, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_RootOrder

@@ -21,7 +21,7 @@ public class Ball : MonoBehaviour
     {
 
         if (isLoseInMap || !isCollected) return;
-        if (orderNumber % 2 == 1)
+        if (orderNumber % 2 == 0)
         {
             meshGO.transform.Rotate(PlayerBall.instance.GetSpeed() * PlayerBall.instance.ballRotateRateSpeed, 0, 0, Space.World);
         }

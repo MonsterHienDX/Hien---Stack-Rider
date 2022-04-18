@@ -206,6 +206,8 @@ public class PlayerBall : MonoBehaviour
             newBall.transform.position = new Vector3(transform.position.x, ballsCollected.Peek().gameObject.transform.position.y - 1, transform.position.z);
         }
         newBall.transform.SetParent(ballsContainer);
+
+        Vibrator.Vibrate(Constant.STRONG_VIBRATE);
     }
 
     private Ball LoseBall()
@@ -216,7 +218,7 @@ public class PlayerBall : MonoBehaviour
 
         int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
         PostEventUpdateBall(characterState);
-
+        Vibrator.Vibrate(Constant.STRONG_VIBRATE);
         return ballLose;
 
     }
@@ -238,6 +240,7 @@ public class PlayerBall : MonoBehaviour
     {
         coinInLevel += amount;
         EventDispatcher.Instance.PostEvent(EventID.UpdateCoin, coinInLevel);
+        Vibrator.Vibrate(Constant.WEAK_VIBRATE);
     }
 
     public void StopMove()
@@ -254,7 +257,6 @@ public class PlayerBall : MonoBehaviour
 
     public float GetSpeed()
     {
-        Debug.Log("Player speed:" + canConfigSpeed);
         return this.canConfigSpeed;
     }
 }
