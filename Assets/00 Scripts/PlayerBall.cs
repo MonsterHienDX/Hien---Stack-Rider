@@ -108,8 +108,9 @@ public class PlayerBall : MonoBehaviour
 
         else if (coll.gameObject.tag == "Wall")
         {
+
             Wall wallCollision = coll.gameObject.GetComponent<Wall>();
-            if (ballsCollected.Count > 0 && !wallCollision.isCollided)
+            if (ballsCollected.Count > 0 && !wallCollision.isCollided && !ballsCollected.Peek().isLoseInMap)
             {
                 LoseBall();
                 wallCollision.isCollided = true;
@@ -118,6 +119,7 @@ public class PlayerBall : MonoBehaviour
             {
                 GameManager.instance.EndLevel(false);
             }
+
         }
 
         else if (coll.gameObject.tag == "Coin")
@@ -237,7 +239,6 @@ public class PlayerBall : MonoBehaviour
 
     public void LoseBallByLava()
     {
-        Debug.LogWarning("LoseBallByLava");
         Destroy(LoseBall().gameObject);
 
         // Play FX ball destroy by lava
@@ -254,14 +255,14 @@ public class PlayerBall : MonoBehaviour
     public void StopMove()
     {
         this.speed = 0;
-        smokeFX.GetComponent<ParticleSystem>().Pause();
+        smokeFX.GetComponentInChildren<ParticleSystem>().Pause();
         isStop = true;
     }
 
     public void StartMove()
     {
         this.speed = canConfigSpeed;
-        smokeFX.GetComponent<ParticleSystem>().Play();
+        smokeFX.GetComponentInChildren<ParticleSystem>().Play();
         isStop = false;
     }
 
@@ -269,15 +270,14 @@ public class PlayerBall : MonoBehaviour
     {
         if (ballsCollected.Count < 1)
         {
-            smokeFX.transform.SetParent(this.transform);
             smokeFX.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         }
         else
         {
             Transform ballTransform = ballsCollected.Peek().gameObject.transform;
-            smokeFX.transform.SetParent(ballTransform);
             smokeFX.transform.position = new Vector3(ballTransform.position.x, ballTransform.position.y + 1, ballTransform.position.z);
         }
+        // smokeFX.transform.position = new Vector3(transform.position.x, ballsCollected.Count + 1, transform.position.z);
     }
 
     public float GetSpeed()

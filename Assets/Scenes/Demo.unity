@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154535, g: 0.22718859, b: 0.30740607, a: 1}
+  m_IndirectSpecularColor: {r: 0.1815452, g: 0.22718838, b: 0.30740565, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -732,9 +732,6 @@ MonoBehaviour:
   isGamePlaying: 1
   levelPrefabs:
   - {fileID: 7608437840169154921, guid: 5da049143739c87469203db74c0df245, type: 3}
-  - {fileID: 7608437840169154921, guid: 673953f0fbcdc8041b5a4ad6488cfe02, type: 3}
-  - {fileID: 7608437840169154921, guid: cc0cb77642b8e3a49a57dc100ca8abce, type: 3}
-  - {fileID: 7608437840169154921, guid: f6c21feb018ffec42b341ae1ea802daa, type: 3}
   levelRoot: {fileID: 380000522}
   _endGamePanelManager: {fileID: 670539872}
   levelNumber: 0
