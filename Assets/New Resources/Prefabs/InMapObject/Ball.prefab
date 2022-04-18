@@ -59,6 +59,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  isLoseInMap: 0
+  orderNumber: 0
+  meshGO: {fileID: 5984236955815040489}
 --- !u!1 &5984236955815040489
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,10 @@ public class PlayerBall : MonoBehaviour
     public bool isStop;
     public Stack<Ball> ballsCollected;
     public static PlayerBall instance;
+    [SerializeField] private GameObject meshGO;
+
+    public float ballRotateRateSpeed;
+
     private void Awake()
     {
         instance = this;
@@ -32,12 +36,26 @@ public class PlayerBall : MonoBehaviour
         PostEventUpdateBall(Constant.RUN_BACKWARD);
     }
 
+    private void BallRotateAnim(bool isAhead)
+    {
+        if (isAhead)
+        {
+            meshGO.transform.Rotate(speed * ballRotateRateSpeed, 0, 0, Space.World);
+        }
+        else
+        {
+            meshGO.transform.Rotate(-speed * ballRotateRateSpeed, 0, 0, Space.World);
+        }
+    }
+
+
     void Update()
     {
         if (isStop) return;
         if (transform.position.z > endPoint.position.z)
         {
             transform.Translate(endPoint.position * Time.deltaTime * speed);
+            BallRotateAnim(ballsCollected.Count % 2 == 1);
         }
         else
         {
@@ -169,6 +187,8 @@ public class PlayerBall : MonoBehaviour
         ballsCollected.Push(newBall);
         // Debug.LogWarning("ballsCollected.Count: " + ballsCollected.Count);
 
+        newBall.orderNumber = ballsCollected.Count;
+
         int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
         PostEventUpdateBall(characterState);
 
@@ -192,6 +212,7 @@ public class PlayerBall : MonoBehaviour
     {
         Ball ballLose = ballsCollected.Pop();
         ballLose.transform.SetParent(mapBallContainer);
+        ballLose.isLoseInMap = true;
 
         int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
         PostEventUpdateBall(characterState);
@@ -229,5 +250,11 @@ public class PlayerBall : MonoBehaviour
     {
         this.speed = canConfigSpeed;
         isStop = false;
+    }
+
+    public float GetSpeed()
+    {
+        Debug.Log("Player speed:" + canConfigSpeed);
+        return this.canConfigSpeed;
     }
 }

@@ -1215,6 +1215,11 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &566864726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3250588539362030708, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
+  m_PrefabInstance: {fileID: 3250588537844285995}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &588677124
 GameObject:
   m_ObjectHideFlags: 0
@@ -4392,6 +4397,10 @@ PrefabInstance:
       value: PlayerBall
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538630152092, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
+      propertyPath: meshGO
+      value: 
+      objectReference: {fileID: 566864726}
+    - target: {fileID: 3250588538630152092, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: endPoint
       value: 
       objectReference: {fileID: 0}
@@ -4402,6 +4411,10 @@ PrefabInstance:
     - target: {fileID: 3250588538630152092, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: mapBallContainer
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250588538630152092, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
+      propertyPath: ballRotateRateSpeed
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538630152093, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_RootOrder
@@ -4609,12 +4622,7 @@ PrefabInstance:
       objectReference: {fileID: 271660591}
     - target: {fileID: 3250588538961091447, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'thumb_01_l'\n\tTransform 'spine_02'\n\tTransform
-        'thumb_01_r'\n\tTransform 'thigh_l'\n\tTransform 'calf_l'\n\tTransform 'spine_01'\n\tTransform
-        'clavicle_r'\n\tTransform 'hand_l'\n\tTransform 'lowerarm_l'\n\tTransform
-        'index_01_l'\n\tand more ...\n\tFrom animation clip 'Sitting Disbelief'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538971285920, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4807,6 +4815,18 @@ PrefabInstance:
     - target: {fileID: 3250588539362030666, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250588539362030667, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250588539362030667, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250588539362030667, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3250588539490255723, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_LocalPosition.x
