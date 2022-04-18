@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 3250588538630152094}
   - component: {fileID: 3250588538630152095}
   - component: {fileID: 3250588538630152092}
+  - component: {fileID: 824958388}
   m_Layer: 0
   m_Name: PlayerBall
   m_TagString: PlayerBall
@@ -473,6 +474,21 @@ MonoBehaviour:
   canConfigSpeed: 0.3
   coinInLevel: 0
   isStop: 0
+  meshGO: {fileID: 0}
+  ballRotateRateSpeed: 0
+--- !u!114 &824958388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250588538630152088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fbd8f6e109392f44936daec5b6cca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 2
 --- !u!1 &3250588538631419427
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322bdc852910eea4b8ac389eb0dfae0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballTransform: {fileID: 3250588538630152093}
+  animator: {fileID: 0}
 --- !u!1 &3250588538971285921
 GameObject:
   m_ObjectHideFlags: 0

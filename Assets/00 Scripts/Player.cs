@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+    Animator animator;
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
