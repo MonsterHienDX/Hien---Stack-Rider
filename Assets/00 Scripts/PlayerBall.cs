@@ -18,6 +18,9 @@ public class PlayerBall : MonoBehaviour
 
     public float ballRotateRateSpeed;
 
+    [SerializeField] private GameObject smokeFXPrefab;
+    [HideInInspector] public GameObject smokeFX;
+
     private void Awake()
     {
         instance = this;
@@ -25,6 +28,7 @@ public class PlayerBall : MonoBehaviour
 
     void Start()
     {
+        smokeFX = Instantiate<GameObject>(smokeFXPrefab, this.transform);
         StopMove();
         ballsCollected = new Stack<Ball>();
         sphereCollider = GetComponent<SphereCollider>();
@@ -77,6 +81,8 @@ public class PlayerBall : MonoBehaviour
         }
 
         this.coinInLevel = 0;
+        // if (transform.GetComponentInChildren<ParticleSystem>().gameObject)
+        //     Destroy(transform.GetComponentInChildren<ParticleSystem>().gameObject);
 
         PostEventUpdateBall(Constant.IDLE);
 
@@ -208,6 +214,8 @@ public class PlayerBall : MonoBehaviour
         newBall.transform.SetParent(ballsContainer);
 
         Vibrator.Vibrate(Constant.STRONG_VIBRATE);
+        SetSmokeFXPosition();
+
     }
 
     private Ball LoseBall()
@@ -219,8 +227,8 @@ public class PlayerBall : MonoBehaviour
         int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
         PostEventUpdateBall(characterState);
         Vibrator.Vibrate(Constant.STRONG_VIBRATE);
+        SetSmokeFXPosition();
         return ballLose;
-
     }
     public void LoseBallByWall()
     {
@@ -246,13 +254,30 @@ public class PlayerBall : MonoBehaviour
     public void StopMove()
     {
         this.speed = 0;
+        smokeFX.GetComponent<ParticleSystem>().Pause();
         isStop = true;
     }
 
     public void StartMove()
     {
         this.speed = canConfigSpeed;
+        smokeFX.GetComponent<ParticleSystem>().Play();
         isStop = false;
+    }
+
+    public void SetSmokeFXPosition()
+    {
+        if (ballsCollected.Count < 1)
+        {
+            smokeFX.transform.SetParent(this.transform);
+            smokeFX.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+        }
+        else
+        {
+            Transform ballTransform = ballsCollected.Peek().gameObject.transform;
+            smokeFX.transform.SetParent(ballTransform);
+            smokeFX.transform.position = new Vector3(ballTransform.position.x, ballTransform.position.y + 1, ballTransform.position.z);
+        }
     }
 
     public float GetSpeed()
