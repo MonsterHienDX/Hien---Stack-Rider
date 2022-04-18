@@ -9,6 +9,6 @@ public enum EventID
     ShowToast,
     NextLevel,
     UpdateCoin,
-
     LoadLevel,
+    ChangeCharacterState,
 }

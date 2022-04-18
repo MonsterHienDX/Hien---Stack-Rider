@@ -71,13 +71,13 @@ public class GameManager : MonoBehaviour
 
     private int GetLevelNumber()
     {
-        if (PlayerPrefs.HasKey(StringConstant.KEY_LEVEL))
+        if (PlayerPrefs.HasKey(Constant.KEY_LEVEL))
         {
-            return PlayerPrefs.GetInt(StringConstant.KEY_LEVEL, 0);
+            return PlayerPrefs.GetInt(Constant.KEY_LEVEL, 0);
         }
         else
         {
-            PlayerPrefs.SetInt(StringConstant.KEY_LEVEL, 1);
+            PlayerPrefs.SetInt(Constant.KEY_LEVEL, 1);
             return 1;
         }
     }
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
     // Set level number
     public void SetLevelNumber(int level)
     {
-        PlayerPrefs.SetInt(StringConstant.KEY_LEVEL, level);
+        PlayerPrefs.SetInt(Constant.KEY_LEVEL, level);
     }
 
     public void EndLevel(bool isWin)
@@ -97,21 +97,23 @@ public class GameManager : MonoBehaviour
         {
             IncreaseCoin();
             NextLevel();
+            EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.WIN);
         }
         else
         {
             LoadLevel();
+            EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.LOSE);
         }
 
     }
 
     private void IncreaseCoin()
     {
-        if (PlayerPrefs.HasKey(StringConstant.KEY_SAVE_COIN))
-            PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, PlayerPrefs.GetInt(StringConstant.KEY_SAVE_COIN) + playerBall.coinInLevel);
+        if (PlayerPrefs.HasKey(Constant.KEY_SAVE_COIN))
+            PlayerPrefs.SetInt(Constant.KEY_SAVE_COIN, PlayerPrefs.GetInt(Constant.KEY_SAVE_COIN) + playerBall.coinInLevel);
         else
         {
-            PlayerPrefs.SetInt(StringConstant.KEY_SAVE_COIN, playerBall.coinInLevel);
+            PlayerPrefs.SetInt(Constant.KEY_SAVE_COIN, playerBall.coinInLevel);
         }
     }
 

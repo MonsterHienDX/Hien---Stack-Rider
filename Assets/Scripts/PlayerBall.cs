@@ -29,6 +29,7 @@ public class PlayerBall : MonoBehaviour
     public void StartPlay()
     {
         StartMove();
+        PostEventUpdateBall(Constant.RUN_BACKWARD);
     }
 
     void Update()
@@ -58,6 +59,8 @@ public class PlayerBall : MonoBehaviour
         }
 
         this.coinInLevel = 0;
+
+        PostEventUpdateBall(Constant.IDLE);
 
         this.transform.position = levelInfo.startPoint.position;
         this.endPoint = levelInfo.endPoint;
@@ -156,10 +159,18 @@ public class PlayerBall : MonoBehaviour
         }
     }
 
+    private void PostEventUpdateBall(int state)
+    {
+        EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, state);
+    }
+
     public void CollectBall(Ball newBall)
     {
         ballsCollected.Push(newBall);
         // Debug.LogWarning("ballsCollected.Count: " + ballsCollected.Count);
+
+        int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
+        PostEventUpdateBall(characterState);
 
         transform.position = new Vector3(transform.position.x, ballsCollected.Count - 1, transform.position.z);
         // sphereCollider.center = new Vector3(sphereCollider.center.x, sphereCollider.center.y - 1, sphereCollider.center.z);
@@ -181,6 +192,10 @@ public class PlayerBall : MonoBehaviour
     {
         Ball ballLose = ballsCollected.Pop();
         ballLose.transform.SetParent(mapBallContainer);
+
+        int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
+        PostEventUpdateBall(characterState);
+
         return ballLose;
 
     }

@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Transform ballTransform;
-    private SphereCollider ballCollider;
-    private void Start()
-    {
-        ballCollider = ballTransform.gameObject.GetComponent<SphereCollider>();
-    }
-    void Update()
+    [SerializeField] Animator animator;
+
+    private void Awake()
     {
     }
+
+    private void OnEnable()
+    {
+        EventDispatcher.Instance.RegisterListener(EventID.ChangeCharacterState, UpdateAnimState);
+    }
+
+    private void OnDisable()
+    {
+        EventDispatcher.Instance.RemoveListener(EventID.ChangeCharacterState, UpdateAnimState);
+    }
+
+    private void UpdateAnimState(object param = null)
+    {
+        int state = (int)param;
+        Debug.Log("char state: " + state);
+        animator.SetInteger("characterState", state);
+    }
+
 }

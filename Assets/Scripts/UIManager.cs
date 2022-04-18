@@ -14,8 +14,8 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        currentCoin = PlayerPrefs.GetInt(StringConstant.KEY_SAVE_COIN);
-        currentLevel = PlayerPrefs.GetInt(StringConstant.KEY_LEVEL);
+        currentCoin = PlayerPrefs.GetInt(Constant.KEY_SAVE_COIN);
+        currentLevel = PlayerPrefs.GetInt(Constant.KEY_LEVEL);
     }
 
     private void OnEnable()
