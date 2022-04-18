@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform levelRoot;
     private GameObject currentLevel;
 
+    [SerializeField] private EndGamePanelManager _endGamePanelManager;
+
     public int levelNumber;
 
     private void Awake()
@@ -67,6 +69,10 @@ public class GameManager : MonoBehaviour
 
         EventDispatcher.Instance.PostEvent(EventID.LoadLevel, levelNumber);
 
+        _endGamePanelManager.HidePopup();
+
+
+
     }
 
     private int GetLevelNumber()
@@ -93,21 +99,18 @@ public class GameManager : MonoBehaviour
         EventDispatcher.Instance.PostEvent(EventID.EndLevel, isWin);
         playerBall.StopMove();
         currentLevel = null;
+        _endGamePanelManager.ShowPopup(isWin);
         if (isWin)
         {
-            IncreaseCoin();
-            NextLevel();
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.WIN);
         }
         else
         {
-            LoadLevel();
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.LOSE);
         }
-
     }
 
-    private void IncreaseCoin()
+    public void IncreaseCoin()
     {
         if (PlayerPrefs.HasKey(Constant.KEY_SAVE_COIN))
             PlayerPrefs.SetInt(Constant.KEY_SAVE_COIN, PlayerPrefs.GetInt(Constant.KEY_SAVE_COIN) + playerBall.coinInLevel);
@@ -115,13 +118,19 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt(Constant.KEY_SAVE_COIN, playerBall.coinInLevel);
         }
+        EventDispatcher.Instance.PostEvent(EventID.UpdateCoin);
     }
 
-    private void NextLevel()
+    public void NextLevel()
     {
         levelNumber += 1;
         SetLevelNumber(levelNumber);
         LoadLevel();
+    }
+
+    public int GetPlayerCoin()
+    {
+        return PlayerPrefs.GetInt(Constant.KEY_SAVE_COIN);
     }
 
 }

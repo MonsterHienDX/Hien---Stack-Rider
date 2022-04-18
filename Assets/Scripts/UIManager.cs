@@ -9,12 +9,10 @@ public class UIManager : MonoBehaviour
     public Text coinText;
     public Text LevelText;
 
-    private int currentCoin;
     private int currentLevel;
 
     private void Awake()
     {
-        currentCoin = PlayerPrefs.GetInt(Constant.KEY_SAVE_COIN);
         currentLevel = PlayerPrefs.GetInt(Constant.KEY_LEVEL);
     }
 
@@ -41,10 +39,10 @@ public class UIManager : MonoBehaviour
         {
             int coinAmount = (int)param;
             // currentCoin += coinAmount;
-            coinText.text = (currentCoin + coinAmount).ToString();
+            coinText.text = (GameManager.instance.GetPlayerCoin() + coinAmount).ToString();
         }
         else
-            coinText.text = (currentCoin).ToString();
+            coinText.text = (GameManager.instance.GetPlayerCoin()).ToString();
     }
 
     private void UpdateLevelUI(object param = null)
