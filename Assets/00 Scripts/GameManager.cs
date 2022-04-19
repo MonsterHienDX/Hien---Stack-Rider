@@ -70,9 +70,6 @@ public class GameManager : MonoBehaviour
         EventDispatcher.Instance.PostEvent(EventID.LoadLevel, levelNumber);
 
         endGamePanelManager.HidePopup();
-
-
-
     }
 
     private int GetLevelNumber()
@@ -106,16 +103,18 @@ public class GameManager : MonoBehaviour
             Vibrator.Vibrate(Constant.STRONG_VIBRATE);
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.WIN);
             playerBall.DestroyBallWhenWin();
+            SetPlayerScore(playerBall.coinInLevel);
         }
         else
         {
             Vibrator.Vibrate(Constant.WEAK_VIBRATE);
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.LOSE);
         }
-        // _endGamePanelManager.ShowPopup(isWin);
+
+        endGamePanelManager.ShowPopup(isWin);
     }
 
-    public void IncreaseCoin()
+    public void SetPlayerCoin()
     {
         if (PlayerPrefs.HasKey(Constant.KEY_SAVE_COIN))
             PlayerPrefs.SetInt(Constant.KEY_SAVE_COIN, PlayerPrefs.GetInt(Constant.KEY_SAVE_COIN) + playerBall.coinInLevel);
@@ -124,6 +123,16 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt(Constant.KEY_SAVE_COIN, playerBall.coinInLevel);
         }
         EventDispatcher.Instance.PostEvent(EventID.UpdateCoin);
+    }
+
+    public void SetPlayerScore(int scoreAmount)
+    {
+        if (PlayerPrefs.HasKey(Constant.KEY_SAVE_SCORE))
+            PlayerPrefs.SetInt(Constant.KEY_SAVE_SCORE, PlayerPrefs.GetInt(Constant.KEY_SAVE_SCORE) + scoreAmount);
+        else
+        {
+            PlayerPrefs.SetInt(Constant.KEY_SAVE_SCORE, 1);
+        }
     }
 
     public void NextLevel()
@@ -136,6 +145,11 @@ public class GameManager : MonoBehaviour
     public int GetPlayerCoin()
     {
         return PlayerPrefs.GetInt(Constant.KEY_SAVE_COIN);
+    }
+
+    public int GetPlayerScore()
+    {
+        return PlayerPrefs.GetInt(Constant.KEY_SAVE_SCORE);
     }
 
     private void SetFPS(int fps)

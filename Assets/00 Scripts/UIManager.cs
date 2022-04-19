@@ -7,10 +7,9 @@ public class UIManager : MonoBehaviour
 {
 
     public Text coinText;
-    public Text LevelText;
-
+    public Text levelText;
+    public Text scoreText;
     private int currentLevel;
-
     private void Awake()
     {
         currentLevel = PlayerPrefs.GetInt(Constant.KEY_LEVEL);
@@ -20,12 +19,18 @@ public class UIManager : MonoBehaviour
     {
         EventDispatcher.Instance.RegisterListener(EventID.UpdateCoin, UpdateCoinUI);
         EventDispatcher.Instance.RegisterListener(EventID.LoadLevel, UpdateLevelUI);
+        EventDispatcher.Instance.RegisterListener(EventID.UpdateScore, UpdateScoreUI);
+        EventDispatcher.Instance.RegisterListener(EventID.LoadLevel, ShowScoreUIWenEndLevel);
+        EventDispatcher.Instance.RegisterListener(EventID.StartPlay, HideScoreUIWhenStartPlay);
     }
 
     private void OnDisable()
     {
         EventDispatcher.Instance.RemoveListener(EventID.UpdateCoin, UpdateCoinUI);
         EventDispatcher.Instance.RemoveListener(EventID.LoadLevel, UpdateLevelUI);
+        EventDispatcher.Instance.RemoveListener(EventID.UpdateScore, UpdateScoreUI);
+        EventDispatcher.Instance.RemoveListener(EventID.LoadLevel, ShowScoreUIWenEndLevel);
+        EventDispatcher.Instance.RemoveListener(EventID.StartPlay, HideScoreUIWhenStartPlay);
     }
 
     private void Start()
@@ -38,7 +43,6 @@ public class UIManager : MonoBehaviour
         if (param != null)
         {
             int coinAmount = (int)param;
-            // currentCoin += coinAmount;
             coinText.text = (GameManager.instance.GetPlayerCoin() + coinAmount).ToString();
         }
         else
@@ -49,7 +53,26 @@ public class UIManager : MonoBehaviour
     {
         currentLevel = (int)param;
         string nText = $"Level: {currentLevel}";
-        LevelText.text = nText;
+        levelText.text = nText;
+    }
+
+    private void UpdateScoreUI(object param = null)
+    {
+        Text scoreAmountUI = scoreText.transform.GetChild(0).gameObject.GetComponent<Text>();
+        int scoreAmount = (int)param;
+
+        GameManager.instance.SetPlayerScore(scoreAmount);
+        scoreAmountUI.text = (GameManager.instance.GetPlayerScore()).ToString();
+    }
+
+    private void HideScoreUIWhenStartPlay(object param = null)
+    {
+        scoreText.gameObject.SetActive(false);
+    }
+
+    private void ShowScoreUIWenEndLevel(object param = null)
+    {
+        scoreText.gameObject.SetActive(true);
     }
 
 }

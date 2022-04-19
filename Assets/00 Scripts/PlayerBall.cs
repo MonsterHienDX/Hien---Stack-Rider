@@ -40,6 +40,7 @@ public class PlayerBall : MonoBehaviour
     {
         StartMove();
         PostEventUpdateBall(Constant.RUN_BACKWARD);
+        EventDispatcher.Instance.PostEvent(EventID.StartPlay);
     }
 
     private void BallRotateAnim(bool isAhead)
@@ -256,6 +257,7 @@ public class PlayerBall : MonoBehaviour
     {
         coinInLevel += amount;
         EventDispatcher.Instance.PostEvent(EventID.UpdateCoin, coinInLevel);
+        EventDispatcher.Instance.PostEvent(EventID.UpdateScore, amount);
         Vibrator.Vibrate(Constant.WEAK_VIBRATE);
     }
 

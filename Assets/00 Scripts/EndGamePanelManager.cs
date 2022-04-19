@@ -5,11 +5,42 @@ using UnityEngine.UI;
 
 public class EndGamePanelManager : MonoBehaviour
 {
-
     [SerializeField] Animator animator;
     public GameObject backGround;
     public GameObject loseGO;
     public GameObject winGO;
+
+
+    public Button SkipLevel;
+    public Button TryAgain;
+
+    public Button x2Coin;
+    public Button NoThanks;
+
+    private void OnEnable()
+    {
+        SkipLevel.onClick.AddListener(GameManager.instance.NextLevel);
+
+        TryAgain.onClick.AddListener(GameManager.instance.LoadLevel);
+
+        x2Coin.onClick.AddListener(GameManager.instance.SetPlayerCoin);
+        x2Coin.onClick.AddListener(GameManager.instance.SetPlayerCoin);
+        x2Coin.onClick.AddListener(GameManager.instance.NextLevel);
+
+        NoThanks.onClick.AddListener(GameManager.instance.SetPlayerCoin);
+        NoThanks.onClick.AddListener(GameManager.instance.NextLevel);
+    }
+
+    private void OnDisable()
+    {
+        SkipLevel.onClick.RemoveAllListeners();
+
+        TryAgain.onClick.RemoveAllListeners();
+
+        x2Coin.onClick.RemoveAllListeners();
+
+        NoThanks.onClick.RemoveAllListeners();
+    }
 
     private void Awake()
     {
