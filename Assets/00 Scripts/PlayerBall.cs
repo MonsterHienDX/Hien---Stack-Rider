@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -299,9 +300,10 @@ public class PlayerBall : MonoBehaviour
         return this.speed;
     }
 
-    public void DestroyBallWhenWin()
+    public void DestroyBallWhenWinAndShowPopup()
     {
-        StartCoroutine(DestroyBallWhenWinCoroutine(.5f));
+        int explodeTime = ballsCollected.Count + 1;
+        StartCoroutine(DestroyBallWhenWinCoroutine(Constant.DELAY_TO_DESTROY_BALL / explodeTime));
     }
 
     IEnumerator DestroyBallWhenWinCoroutine(float delay)
@@ -330,6 +332,8 @@ public class PlayerBall : MonoBehaviour
 
         this.meshGO.SetActive(false);
         sphereCollider.enabled = false;
-    }
 
+        GameManager.instance.endGamePanelManager.ShowPopup(true);
+        // EventDispatcher.Instance.PostEvent(EventID.BallsExpodeDone);
+    }
 }

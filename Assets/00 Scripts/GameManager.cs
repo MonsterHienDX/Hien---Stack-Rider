@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> levelPrefabs;
     [SerializeField] Transform levelRoot;
     private GameObject currentLevel;
-    [SerializeField] private EndGamePanelManager endGamePanelManager;
+    [SerializeField] public EndGamePanelManager endGamePanelManager;
     [SerializeField] private FloatingTextManager floatingTextManager;
 
     public int levelNumber;
@@ -102,16 +102,20 @@ public class GameManager : MonoBehaviour
 
             Vibrator.Vibrate(Constant.STRONG_VIBRATE);
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.WIN);
-            playerBall.DestroyBallWhenWin();
+            playerBall.DestroyBallWhenWinAndShowPopup();
             SetPlayerScore(playerBall.coinInLevel);
         }
         else
         {
             Vibrator.Vibrate(Constant.WEAK_VIBRATE);
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.LOSE);
+            endGamePanelManager.ShowPopup(isWin);
         }
+    }
 
-        endGamePanelManager.ShowPopup(isWin);
+    private IEnumerator WaitBallsExplode()
+    {
+        yield return new WaitForSeconds(Constant.DELAY_TO_DESTROY_BALL);
     }
 
     public void SetPlayerCoin()

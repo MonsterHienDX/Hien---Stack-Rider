@@ -49,7 +49,7 @@ public class EndGamePanelManager : MonoBehaviour
 
     public void ShowPopup(bool isWin)
     {
-        // backGround.GetComponent<Image>().enabled = true;
+
         backGround.SetActive(true);
 
         StartCoroutine(EnableButton(isWin));

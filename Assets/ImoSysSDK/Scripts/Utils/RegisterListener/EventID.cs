@@ -13,4 +13,5 @@ public enum EventID
     LoadLevel,
     ChangeCharacterState,
     StartPlay,
+    BallsExpodeDone,
 }
