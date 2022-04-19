@@ -264,6 +264,7 @@ public class PlayerBall : MonoBehaviour
         this.speed = canConfigSpeed;
         smokeFX.GetComponentInChildren<ParticleSystem>().Play();
         isStop = false;
+        SetSmokeFXPosition();
     }
 
     public void SetSmokeFXPosition()
