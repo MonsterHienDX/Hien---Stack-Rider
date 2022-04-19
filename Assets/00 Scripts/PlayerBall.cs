@@ -320,7 +320,7 @@ public class PlayerBall : MonoBehaviour
             GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 60, .5f);
 
             // ____Play FX ball explode____
-            // ____Floating coin amount____
+
         }
         yield return new WaitForSeconds(delay);
 
