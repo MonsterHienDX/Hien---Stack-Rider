@@ -787,7 +787,7 @@ MonoBehaviour:
   isLose: 0
   isGamePlaying: 1
   levelPrefabs:
-  - {fileID: 7608437840169154921, guid: 673953f0fbcdc8041b5a4ad6488cfe02, type: 3}
+  - {fileID: 7608437840169154921, guid: cc0cb77642b8e3a49a57dc100ca8abce, type: 3}
   levelRoot: {fileID: 1471377825}
   endGamePanelManager: {fileID: 670539872}
   floatingTextManager: {fileID: 1275791799}
@@ -799,12 +799,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380000520}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &399240469
 GameObject:
@@ -2992,7 +2992,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1496186926 stripped
 GameObject:
