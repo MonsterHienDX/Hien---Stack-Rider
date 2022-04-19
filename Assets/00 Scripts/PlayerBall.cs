@@ -9,13 +9,14 @@ public class PlayerBall : MonoBehaviour
     [SerializeField] private Transform mapBallContainer;
     public float canConfigSpeed;
     private float speed;
+    private float scaleRateSpeed;
+    private float scaleRateSpeed2;
     private SphereCollider sphereCollider;
     public int coinInLevel;
     public bool isStop;
     public Stack<Ball> ballsCollected;
     public static PlayerBall instance;
     [SerializeField] private GameObject meshGO;
-
     public float ballRotateRateSpeed;
 
     [SerializeField] private GameObject smokeFXPrefab;
@@ -91,6 +92,9 @@ public class PlayerBall : MonoBehaviour
         this.transform.position = levelInfo.startPoint.position;
         this.endPoint = levelInfo.endPoint;
         this.mapBallContainer = levelInfo.mapBallManager;
+        this.scaleRateSpeed = Constant.STANDART_SCALE_MAP_LENGTH / levelInfo.road_transf_scale_z;
+        Debug.LogWarning("scaleRateSpeed: " + scaleRateSpeed);
+        Debug.LogWarning("Scale distance z: " + Mathf.Abs((Constant.STANDART_SCALE_MAP_LENGTH / levelInfo.distanceStartToEnd)));
     }
 
 
@@ -121,7 +125,6 @@ public class PlayerBall : MonoBehaviour
             {
                 GameManager.instance.EndLevel(false);
             }
-
         }
 
         else if (coll.gameObject.tag == "Coin")
@@ -195,18 +198,14 @@ public class PlayerBall : MonoBehaviour
     public void CollectBall(Ball newBall)
     {
         ballsCollected.Push(newBall);
-        // Debug.LogWarning("ballsCollected.Count: " + ballsCollected.Count);
-
         newBall.orderNumber = ballsCollected.Count + 1;
+        newBall.isCollected = true;
+        newBall.transform.SetParent(ballsContainer);
 
         int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
         PostEventUpdateBall(characterState);
 
         transform.position = new Vector3(transform.position.x, ballsCollected.Count - 1, transform.position.z);
-        // sphereCollider.center = new Vector3(sphereCollider.center.x, sphereCollider.center.y - 1, sphereCollider.center.z);
-
-        newBall.isCollected = true;
-
         if (ballsCollected.Count < 1)
         {
             newBall.transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
@@ -215,11 +214,11 @@ public class PlayerBall : MonoBehaviour
         {
             newBall.transform.position = new Vector3(transform.position.x, ballsCollected.Peek().gameObject.transform.position.y - 1, transform.position.z);
         }
-        newBall.transform.SetParent(ballsContainer);
+
 
         Vibrator.Vibrate(Constant.STRONG_VIBRATE);
-        SetSmokeFXPosition();
 
+        SetSmokeFXPosition();
     }
 
     private Ball LoseBall()
@@ -252,6 +251,9 @@ public class PlayerBall : MonoBehaviour
         coinInLevel += amount;
         EventDispatcher.Instance.PostEvent(EventID.UpdateCoin, coinInLevel);
         Vibrator.Vibrate(Constant.WEAK_VIBRATE);
+
+        // ____Floating coin amount____
+
     }
 
     public void StopMove()
@@ -266,7 +268,7 @@ public class PlayerBall : MonoBehaviour
 
     public void StartMove()
     {
-        this.speed = canConfigSpeed;
+        this.speed = canConfigSpeed * scaleRateSpeed;
         smokeFX.SetActive(true);
         smokeFX.GetComponentInChildren<ParticleSystem>().Play();
         isStop = false;
@@ -289,7 +291,7 @@ public class PlayerBall : MonoBehaviour
 
     public float GetSpeed()
     {
-        return this.canConfigSpeed;
+        return this.speed;
     }
 
     public void DestroyBallWhenWin()
@@ -304,11 +306,9 @@ public class PlayerBall : MonoBehaviour
         {
             yield return new WaitForSeconds(delay);
             Destroy(ballsCollected.Pop().gameObject);
-            Debug.LogWarning("DestroyEachBall");
             coinCount += 5;
             CollectCoin(coinCount);
             // ____Play FX ball explode____
-            // ____Floating coin amount____
         }
         yield return new WaitForSeconds(delay);
         this.meshGO.SetActive(false);

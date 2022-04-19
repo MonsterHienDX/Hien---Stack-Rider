@@ -1,4 +1,4 @@
-
+using UnityEngine;
 public static class Constant
 {
     // ____STRING KEYS____
@@ -16,5 +16,7 @@ public static class Constant
     public const long STRONG_VIBRATE = 90;
     public const long WEAK_VIBRATE = 35;
 
+    // ____STANDART SYSTEM STATS____
     public const int FPS = 80;
+    public const int STANDART_SCALE_MAP_LENGTH = 60;   // Sync player speed with any maps (because of using transform.Translate to move)
 }

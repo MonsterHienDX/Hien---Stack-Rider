@@ -802,6 +802,8 @@ MonoBehaviour:
   startPoint: {fileID: 7608437841746430615}
   endPoint: {fileID: 7608437840227257313}
   mapBallManager: {fileID: 7608437841685079783}
+  road_transf_scale_z: 0
+  roadTransform: {fileID: 7608437841683638741}
 --- !u!1 &7608437840227257312
 GameObject:
   m_ObjectHideFlags: 0
