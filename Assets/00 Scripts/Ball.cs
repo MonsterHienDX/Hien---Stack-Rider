@@ -19,7 +19,6 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-
         if (isLoseInMap || !isCollected) return;
         if (orderNumber % 2 == 0)
         {

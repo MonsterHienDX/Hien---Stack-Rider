@@ -24,6 +24,8 @@ public class PlayerBall : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        sphereCollider = GetComponent<SphereCollider>();
+
     }
 
     void Start()
@@ -31,7 +33,6 @@ public class PlayerBall : MonoBehaviour
         smokeFX = Instantiate<GameObject>(smokeFXPrefab, this.transform);
         StopMove();
         ballsCollected = new Stack<Ball>();
-        sphereCollider = GetComponent<SphereCollider>();
     }
 
     public void StartPlay()
@@ -81,8 +82,9 @@ public class PlayerBall : MonoBehaviour
         }
 
         this.coinInLevel = 0;
-        // if (transform.GetComponentInChildren<ParticleSystem>().gameObject)
-        //     Destroy(transform.GetComponentInChildren<ParticleSystem>().gameObject);
+
+        this.meshGO.SetActive(true);
+        sphereCollider.enabled = true;
 
         PostEventUpdateBall(Constant.IDLE);
 
@@ -195,7 +197,7 @@ public class PlayerBall : MonoBehaviour
         ballsCollected.Push(newBall);
         // Debug.LogWarning("ballsCollected.Count: " + ballsCollected.Count);
 
-        newBall.orderNumber = ballsCollected.Count;
+        newBall.orderNumber = ballsCollected.Count + 1;
 
         int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
         PostEventUpdateBall(characterState);
@@ -256,12 +258,16 @@ public class PlayerBall : MonoBehaviour
     {
         this.speed = 0;
         smokeFX.GetComponentInChildren<ParticleSystem>().Pause();
+        smokeFX.SetActive(false);
+        // smokeFX.GetComponentInChildren<ParticleSystem>().Pause();
         isStop = true;
+
     }
 
     public void StartMove()
     {
         this.speed = canConfigSpeed;
+        smokeFX.SetActive(true);
         smokeFX.GetComponentInChildren<ParticleSystem>().Play();
         isStop = false;
         SetSmokeFXPosition();
@@ -285,4 +291,28 @@ public class PlayerBall : MonoBehaviour
     {
         return this.canConfigSpeed;
     }
+
+    public void DestroyBallWhenWin()
+    {
+        StartCoroutine(DestroyEachBall(.5f));
+    }
+
+    IEnumerator DestroyEachBall(float delay)
+    {
+        int coinCount = 0;
+        while (ballsCollected.Count > 0)
+        {
+            yield return new WaitForSeconds(delay);
+            Destroy(ballsCollected.Pop().gameObject);
+            Debug.LogWarning("DestroyEachBall");
+            coinCount += 5;
+            CollectCoin(coinCount);
+            // ____Play FX ball explode____
+            // ____Floating coin amount____
+        }
+        yield return new WaitForSeconds(delay);
+        this.meshGO.SetActive(false);
+        sphereCollider.enabled = false;
+    }
+
 }

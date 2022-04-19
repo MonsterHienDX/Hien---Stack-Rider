@@ -99,18 +99,20 @@ public class GameManager : MonoBehaviour
         EventDispatcher.Instance.PostEvent(EventID.EndLevel, isWin);
         playerBall.StopMove();
         currentLevel = null;
-        _endGamePanelManager.ShowPopup(isWin);
+
         if (isWin)
         {
 
             Vibrator.Vibrate(Constant.STRONG_VIBRATE);
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.WIN);
+            playerBall.DestroyBallWhenWin();
         }
         else
         {
             Vibrator.Vibrate(Constant.WEAK_VIBRATE);
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.LOSE);
         }
+        // _endGamePanelManager.ShowPopup(isWin);
     }
 
     public void IncreaseCoin()
