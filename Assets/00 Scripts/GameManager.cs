@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> levelPrefabs;
     [SerializeField] Transform levelRoot;
     private GameObject currentLevel;
-
-    [SerializeField] private EndGamePanelManager _endGamePanelManager;
+    [SerializeField] private EndGamePanelManager endGamePanelManager;
+    [SerializeField] private FloatingTextManager floatingTextManager;
 
     public int levelNumber;
 
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 
         EventDispatcher.Instance.PostEvent(EventID.LoadLevel, levelNumber);
 
-        _endGamePanelManager.HidePopup();
+        endGamePanelManager.HidePopup();
 
 
 
@@ -141,6 +141,11 @@ public class GameManager : MonoBehaviour
     private void SetFPS(int fps)
     {
         Application.targetFrameRate = fps;
+    }
+
+    public void ShowFloatingText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
+    {
+        floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
     }
 
 }

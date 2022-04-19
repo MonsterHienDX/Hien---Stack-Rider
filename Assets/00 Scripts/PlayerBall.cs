@@ -22,11 +22,11 @@ public class PlayerBall : MonoBehaviour
     [SerializeField] private GameObject smokeFXPrefab;
     [HideInInspector] public GameObject smokeFX;
 
+    private Vector3 showTextPos;
     private void Awake()
     {
         instance = this;
         sphereCollider = GetComponent<SphereCollider>();
-
     }
 
     void Start()
@@ -199,6 +199,9 @@ public class PlayerBall : MonoBehaviour
         ballsCollected.Push(newBall);
         // Debug.LogWarning("ballsCollected.Count: " + ballsCollected.Count);
 
+        showTextPos = new Vector3(-0.7f, 1f, this.transform.position.z);
+        GameManager.instance.ShowFloatingText(($"+" + 1), 60, Color.yellow, showTextPos, Vector3.up * 60, 1f);
+
         newBall.orderNumber = ballsCollected.Count + 1;
 
         int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
@@ -296,23 +299,33 @@ public class PlayerBall : MonoBehaviour
 
     public void DestroyBallWhenWin()
     {
-        StartCoroutine(DestroyEachBall(.5f));
+        StartCoroutine(DestroyBallWhenWinCoroutine(.5f));
     }
 
-    IEnumerator DestroyEachBall(float delay)
+    IEnumerator DestroyBallWhenWinCoroutine(float delay)
     {
         int coinCount = 0;
         while (ballsCollected.Count > 0)
         {
             yield return new WaitForSeconds(delay);
             Destroy(ballsCollected.Pop().gameObject);
-            Debug.LogWarning("DestroyEachBall");
             coinCount += 5;
             CollectCoin(coinCount);
+
+            showTextPos = new Vector3(-0.85f, 1f, this.transform.position.z);
+            GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 60, .5f);
+
             // ____Play FX ball explode____
             // ____Floating coin amount____
         }
         yield return new WaitForSeconds(delay);
+
+        coinCount += 5;
+        CollectCoin(coinCount);
+
+        showTextPos = new Vector3(-0.85f, 1f, this.transform.position.z);
+        GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 60, .5f);
+
         this.meshGO.SetActive(false);
         sphereCollider.enabled = false;
     }
