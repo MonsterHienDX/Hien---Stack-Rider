@@ -9,6 +9,7 @@ public class PlayerBall : MonoBehaviour
     [SerializeField] private Transform mapBallContainer;
     public float canConfigSpeed;
     private float speed;
+    private float scaleRateSpeed;
     private SphereCollider sphereCollider;
     public int coinInLevel;
     public bool isStop;
@@ -91,6 +92,7 @@ public class PlayerBall : MonoBehaviour
         this.transform.position = levelInfo.startPoint.position;
         this.endPoint = levelInfo.endPoint;
         this.mapBallContainer = levelInfo.mapBallManager;
+        this.scaleRateSpeed = levelInfo.scaleRateSpeed;
     }
 
 
@@ -266,7 +268,7 @@ public class PlayerBall : MonoBehaviour
 
     public void StartMove()
     {
-        this.speed = canConfigSpeed;
+        this.speed = canConfigSpeed * scaleRateSpeed;
         smokeFX.SetActive(true);
         smokeFX.GetComponentInChildren<ParticleSystem>().Play();
         isStop = false;
@@ -289,7 +291,7 @@ public class PlayerBall : MonoBehaviour
 
     public float GetSpeed()
     {
-        return this.canConfigSpeed;
+        return this.speed;
     }
 
     public void DestroyBallWhenWin()

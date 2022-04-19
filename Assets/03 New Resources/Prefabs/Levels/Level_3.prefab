@@ -760,7 +760,7 @@ GameObject:
   - component: {fileID: 7608437840169154922}
   - component: {fileID: 7608437840169154923}
   m_Layer: 0
-  m_Name: Map_3
+  m_Name: Level_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -802,6 +802,7 @@ MonoBehaviour:
   startPoint: {fileID: 7608437841746430615}
   endPoint: {fileID: 7608437840227257313}
   mapBallManager: {fileID: 7608437841685079783}
+  scaleRateSpeed: 3
 --- !u!1 &7608437840227257312
 GameObject:
   m_ObjectHideFlags: 0
