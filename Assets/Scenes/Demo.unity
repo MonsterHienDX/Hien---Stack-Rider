@@ -731,7 +731,7 @@ MonoBehaviour:
   isLose: 0
   isGamePlaying: 1
   levelPrefabs:
-  - {fileID: 7608437840169154921, guid: 5da049143739c87469203db74c0df245, type: 3}
+  - {fileID: 7608437840169154921, guid: 673953f0fbcdc8041b5a4ad6488cfe02, type: 3}
   levelRoot: {fileID: 1471377825}
   _endGamePanelManager: {fileID: 670539872}
   levelNumber: 0
@@ -1988,7 +1988,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -700}
+  m_AnchoredPosition: {x: 0, y: -800}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1145585236
@@ -4164,7 +4164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538630152092, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: ballRotateRateSpeed
-      value: 80
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538630152093, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_RootOrder
