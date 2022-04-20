@@ -6,12 +6,9 @@ public class Ball : MonoBehaviour
 {
     public bool isCollected;
     public bool isLoseInMap;
-    private SphereCollider sphereCollider;
-    private Animator animator;
-
     public int orderNumber;
-
     [SerializeField] private GameObject meshGO;
+
     private void Start()
     {
         isLoseInMap = false;
@@ -28,5 +25,10 @@ public class Ball : MonoBehaviour
         {
             meshGO.transform.Rotate(-PlayerBall.instance.GetSpeed() * PlayerBall.instance.ballRotateRateSpeed, 0, 0, Space.World);
         }
+    }
+
+    public void SetColor(Material ballMaterial)
+    {
+        meshGO.GetComponent<MeshRenderer>().material = ballMaterial;
     }
 }

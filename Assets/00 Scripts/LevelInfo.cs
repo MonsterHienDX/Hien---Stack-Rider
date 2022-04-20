@@ -6,7 +6,9 @@ public class LevelInfo : MonoBehaviour
 {
     public Transform startPoint;
     public Transform endPoint;
-    public Transform mapBallManager;
+    public Transform ballMapContainer;
+    public Transform wallMapContainer;
+    public Transform coinMapContainer;
     public float scaleRateSpeed;
 
 }

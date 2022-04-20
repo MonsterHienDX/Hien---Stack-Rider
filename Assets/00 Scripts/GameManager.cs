@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public EndGamePanelManager endGamePanelManager;
     [SerializeField] private FloatingTextManager floatingTextManager;
 
+    [SerializeField] private BallManager ballManager;
     public int levelNumber;
 
     private void Awake()
@@ -70,6 +71,8 @@ public class GameManager : MonoBehaviour
         EventDispatcher.Instance.PostEvent(EventID.LoadLevel, levelNumber);
 
         endGamePanelManager.HidePopup();
+
+        ballManager.Init(levelInfo.ballMapContainer);
     }
 
     private int GetLevelNumber()

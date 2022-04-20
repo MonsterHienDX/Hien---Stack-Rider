@@ -93,7 +93,7 @@ public class PlayerBall : MonoBehaviour
 
         this.transform.position = levelInfo.startPoint.position;
         this.endPoint = levelInfo.endPoint;
-        this.mapBallContainer = levelInfo.mapBallManager;
+        this.mapBallContainer = levelInfo.ballMapContainer;
         this.scaleRateSpeed = levelInfo.scaleRateSpeed;
     }
 
