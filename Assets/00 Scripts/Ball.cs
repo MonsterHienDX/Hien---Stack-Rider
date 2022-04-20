@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
 {
     public bool isCollected;
     public bool isLoseInMap;
-    public int orderNumber;
+    public bool rollAhead;
     [SerializeField] private GameObject meshGO;
 
     private void Start()
@@ -17,13 +17,13 @@ public class Ball : MonoBehaviour
     private void Update()
     {
         if (isLoseInMap || !isCollected) return;
-        if (orderNumber % 2 == 0)
+        if (rollAhead)
         {
-            meshGO.transform.Rotate(PlayerBall.instance.GetSpeed() * PlayerBall.instance.ballRotateRateSpeed, 0, 0, Space.World);
+            meshGO.transform.Rotate(-PlayerBall.instance.GetSpeed() * PlayerBall.instance.ballRotateRateSpeed, 0, 0, Space.World);
         }
         else
         {
-            meshGO.transform.Rotate(-PlayerBall.instance.GetSpeed() * PlayerBall.instance.ballRotateRateSpeed, 0, 0, Space.World);
+            meshGO.transform.Rotate(PlayerBall.instance.GetSpeed() * PlayerBall.instance.ballRotateRateSpeed, 0, 0, Space.World);
         }
     }
 
@@ -31,4 +31,12 @@ public class Ball : MonoBehaviour
     {
         meshGO.GetComponent<MeshRenderer>().material = ballMaterial;
     }
+
+    public void ReverseRollDir(int ballAmount)
+    {
+
+        // this.rollAhead = ballAmount % 2 == 1;
+        this.rollAhead = !this.rollAhead;
+    }
+
 }

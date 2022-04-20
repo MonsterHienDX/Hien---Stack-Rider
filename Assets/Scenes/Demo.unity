@@ -787,7 +787,7 @@ MonoBehaviour:
   isLose: 0
   isGamePlaying: 1
   levelPrefabs:
-  - {fileID: 7608437840169154921, guid: cc0cb77642b8e3a49a57dc100ca8abce, type: 3}
+  - {fileID: 7608437840169154921, guid: 234e014253807d447bf62cdd05418779, type: 3}
   levelRoot: {fileID: 1471377825}
   endGamePanelManager: {fileID: 670539872}
   floatingTextManager: {fileID: 1275791799}

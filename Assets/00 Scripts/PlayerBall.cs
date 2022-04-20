@@ -198,13 +198,15 @@ public class PlayerBall : MonoBehaviour
 
     public void CollectBall(Ball newBall)
     {
+
+        ReverseAllBallRollDir();
+
         ballsCollected.Push(newBall);
-        // Debug.LogWarning("ballsCollected.Count: " + ballsCollected.Count);
+
+        newBall.rollAhead = true;
 
         showTextPos = new Vector3(-0.7f, 1f, this.transform.position.z);
         GameManager.instance.ShowFloatingText(($"+" + 1), 60, Color.yellow, showTextPos, Vector3.up * 60, 1f);
-
-        newBall.orderNumber = ballsCollected.Count + 1;
 
         int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
         PostEventUpdateBall(characterState);
@@ -229,11 +231,21 @@ public class PlayerBall : MonoBehaviour
 
     }
 
+    private void ReverseAllBallRollDir()
+    {
+        foreach (Ball b in ballsCollected)
+        {
+            b.ReverseRollDir(ballsCollected.Count);
+        }
+    }
+
     private Ball LoseBall()
     {
         Ball ballLose = ballsCollected.Pop();
         ballLose.transform.SetParent(mapBallContainer);
         ballLose.isLoseInMap = true;
+
+        ReverseAllBallRollDir();
 
         int characterState = ballsCollected.Count % 2 == 0 ? Constant.RUN_BACKWARD : Constant.RUN_FAST;
         PostEventUpdateBall(characterState);
