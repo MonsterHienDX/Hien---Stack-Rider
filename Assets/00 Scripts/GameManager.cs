@@ -102,10 +102,10 @@ public class GameManager : MonoBehaviour
 
         if (isWin)
         {
-
+            AudioManager.instance.PlayAudio(AudioName.congratulation);
             Vibrator.Vibrate(Constant.STRONG_VIBRATE);
             EventDispatcher.Instance.PostEvent(EventID.ChangeCharacterState, Constant.WIN);
-            playerBall.DestroyBallWhenWinAndShowPopup();
+            StartCoroutine(WaitBallsExplodeThenPopup());
             SetPlayerScore(playerBall.coinInLevel);
         }
         else
@@ -116,9 +116,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitBallsExplode()
+    private IEnumerator WaitBallsExplodeThenPopup()
     {
-        yield return new WaitForSeconds(Constant.DELAY_TO_DESTROY_BALL);
+        yield return new WaitForSeconds(Constant.DELAY_TO_DESTROY_BALL - 1f);
+        playerBall.DestroyBallWhenWinAndShowPopup();
     }
 
     public void SetPlayerCoin()

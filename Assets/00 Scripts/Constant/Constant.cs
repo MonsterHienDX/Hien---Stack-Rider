@@ -1,4 +1,3 @@
-
 public static class Constant
 {
     // ____STRING KEYS____
@@ -19,5 +18,5 @@ public static class Constant
 
     // ____INGAME SYSTEM STATS____
     public const int FPS = 80;
-    public const float DELAY_TO_DESTROY_BALL = 5f;
+    public const float DELAY_TO_DESTROY_BALL = 4.5f;
 }

@@ -114,6 +114,7 @@ public class PlayerBall : MonoBehaviour
 
         else if (coll.gameObject.tag == "Wall")
         {
+            AudioManager.instance.PlayAudio(AudioName.ballLoseByWall);
 
             Wall wallCollision = coll.gameObject.GetComponent<Wall>();
             if (ballsCollected.Count > 0 && !wallCollision.isCollided && !ballsCollected.Peek().isLoseInMap)
@@ -176,6 +177,7 @@ public class PlayerBall : MonoBehaviour
             Coin coin = coll.gameObject.GetComponent<Coin>();
             CollectCoin(coin.coinAmount);
             coll.gameObject.SetActive(false);
+            AudioManager.instance.PlayAudio(AudioName.coinCollected);
         }
 
         else if (coll.gameObject.tag == "Lava")
@@ -198,6 +200,7 @@ public class PlayerBall : MonoBehaviour
 
     public void CollectBall(Ball newBall)
     {
+        AudioManager.instance.PlayAudio(AudioName.ballCollected);
 
         ReverseAllBallRollDir();
 
@@ -331,6 +334,9 @@ public class PlayerBall : MonoBehaviour
             showTextPos = new Vector3(-0.85f, 1f, this.transform.position.z);
             GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 60, .5f);
 
+            AudioManager.instance.PlayAudio(AudioName.ballBreak);
+
+
             // ____Play FX ball explode____
 
         }
@@ -341,6 +347,8 @@ public class PlayerBall : MonoBehaviour
 
         showTextPos = new Vector3(-0.85f, 1f, this.transform.position.z);
         GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 60, .5f);
+
+        AudioManager.instance.PlayAudio(AudioName.ballBreak);
 
         this.meshGO.SetActive(false);
         sphereCollider.enabled = false;
