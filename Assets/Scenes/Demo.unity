@@ -787,7 +787,7 @@ MonoBehaviour:
   isLose: 0
   isGamePlaying: 1
   levelPrefabs:
-  - {fileID: 7608437840169154921, guid: 234e014253807d447bf62cdd05418779, type: 3}
+  - {fileID: 7608437840169154921, guid: 528a663d139ee2546b489895c12f18da, type: 3}
   levelRoot: {fileID: 1471377825}
   endGamePanelManager: {fileID: 670539872}
   floatingTextManager: {fileID: 1275791799}
@@ -2804,6 +2804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1116805467}
+  distancePlayerToCam: 10
 --- !u!114 &1414154342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4400,6 +4401,10 @@ PrefabInstance:
     - target: {fileID: 3250588538630152095, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_Constraints
       value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250588538961091440, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538961091446, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: animator
