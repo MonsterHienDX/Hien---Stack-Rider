@@ -68,17 +68,14 @@ public class FXManager : MonoBehaviour
 
     private FX_Break GetFX()
     {
-
-        FX_Break result;
         for (int i = 0; i < _FX_Breakes.Count; i++)
         {
             if (_FX_Breakes[i].CanUse)
-                result = _FX_Breakes[i];
+                return _FX_Breakes[i];
         }
 
         FX_Break _FX_Break = Instantiate<FX_Break>(_FX_Prefabs, this.transform);
         _FX_Breakes.Add(_FX_Break);
-        result = _FX_Break;
         return _FX_Break;
     }
 

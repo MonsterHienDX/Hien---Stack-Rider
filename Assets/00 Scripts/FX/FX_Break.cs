@@ -7,7 +7,7 @@ public class FX_Break : MonoBehaviour
 
     public ParticleSystem BallBreak;
 
-    private bool _canUse;
+    [SerializeField] private bool _canUse;
     public bool CanUse
     { // This is a property.
         get
