@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
     private GameObject currentLevel;
     [SerializeField] public EndGamePanelManager endGamePanelManager;
     [SerializeField] private FloatingTextManager floatingTextManager;
-
     [SerializeField] private BallManager ballManager;
     public int levelNumber;
-
+    [SerializeField] private MeshRenderer quadMeshRenderer;
+    [SerializeField] private List<Material> bgrMaterial;
     private void Awake()
     {
         instance = this;
@@ -65,14 +65,19 @@ public class GameManager : MonoBehaviour
         currentLevel.transform.SetParent(levelRoot);
 
         LevelInfo levelInfo = currentLevel.GetComponent<LevelInfo>();
-
         playerBall.Init(levelInfo);
+        ballManager.Init(levelInfo.ballMapContainer);
 
         EventDispatcher.Instance.PostEvent(EventID.LoadLevel, levelNumber);
 
         endGamePanelManager.HidePopup();
 
-        ballManager.Init(levelInfo.ballMapContainer);
+        ChangeBackGroundColor(bgrMaterial[UnityEngine.Random.Range(0, bgrMaterial.Count)]);
+    }
+
+    private void ChangeBackGroundColor(Material material)
+    {
+        quadMeshRenderer.material = material;
     }
 
     private int GetLevelNumber()

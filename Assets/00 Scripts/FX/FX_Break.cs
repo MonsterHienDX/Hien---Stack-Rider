@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallTrail : MonoBehaviour
+public class FX_Break : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
