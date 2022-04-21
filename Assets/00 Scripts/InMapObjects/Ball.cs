@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
     public bool isLoseInMap;
     public bool rollAhead;
     [SerializeField] private GameObject meshGO;
-
+    public Material material;
     private void Start()
     {
         isLoseInMap = false;
@@ -30,6 +30,7 @@ public class Ball : MonoBehaviour
     public void SetColor(Material ballMaterial)
     {
         meshGO.GetComponent<MeshRenderer>().material = ballMaterial;
+        this.material = ballMaterial;
     }
 
     public void ReverseRollDir(int ballAmount)

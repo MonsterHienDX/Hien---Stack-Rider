@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitBallsExplodeThenPopup()
     {
-        yield return new WaitForSeconds(Constant.DELAY_TO_DESTROY_BALL - 1f);
+        yield return new WaitForSeconds(Constant.DELAY_TO_DESTROY_BALL - 1.5f);
         playerBall.DestroyBallWhenWinAndShowPopup();
     }
 

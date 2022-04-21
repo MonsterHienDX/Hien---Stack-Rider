@@ -327,7 +327,10 @@ public class PlayerBall : MonoBehaviour
         while (ballsCollected.Count > 0)
         {
             yield return new WaitForSeconds(delay);
-            Destroy(ballsCollected.Pop().gameObject);
+            Ball ballToDestroy = ballsCollected.Pop();
+            FXManager.instance.Play(ballToDestroy.transform.position, ballToDestroy.material);
+
+            Destroy(ballToDestroy.gameObject);
             coinCount += 5;
             CollectCoin(coinCount);
 
@@ -338,7 +341,6 @@ public class PlayerBall : MonoBehaviour
 
 
             // ____Play FX ball explode____
-
         }
         yield return new WaitForSeconds(delay);
 
@@ -348,6 +350,7 @@ public class PlayerBall : MonoBehaviour
         showTextPos = new Vector3(-0.85f, 1f, this.transform.position.z);
         GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 60, .5f);
 
+        FXManager.instance.Play(transform.position, meshGO.GetComponent<MeshRenderer>().material);
         AudioManager.instance.PlayAudio(AudioName.ballBreak);
 
         this.meshGO.SetActive(false);
