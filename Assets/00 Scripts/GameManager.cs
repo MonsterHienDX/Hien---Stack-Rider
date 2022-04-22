@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
 
         if (levelNumber < levelPrefabs.Count)
-            currentLevel = Instantiate<GameObject>(levelPrefabs[levelNumber], levelRoot);
+            currentLevel = Instantiate<GameObject>(levelPrefabs[levelNumber - 1], levelRoot);
         else
         {
             currentLevel = Instantiate<GameObject>(levelPrefabs[UnityEngine.Random.Range(0, levelPrefabs.Count)], levelRoot);

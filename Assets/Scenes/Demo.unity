@@ -787,7 +787,11 @@ MonoBehaviour:
   isLose: 0
   isGamePlaying: 1
   levelPrefabs:
+  - {fileID: 7608437840169154921, guid: 234e014253807d447bf62cdd05418779, type: 3}
   - {fileID: 7608437840169154921, guid: 528a663d139ee2546b489895c12f18da, type: 3}
+  - {fileID: 7608437840169154921, guid: cb77644aff5e3984ba77a2d5cec7d3f3, type: 3}
+  - {fileID: 7608437840169154921, guid: dcbe4d9bee603d941a5a52ff11c2e3a0, type: 3}
+  - {fileID: 7608437840169154921, guid: d2d1d20ea17fd014f96c483aa6f0224c, type: 3}
   levelRoot: {fileID: 1471377825}
   endGamePanelManager: {fileID: 670539872}
   floatingTextManager: {fileID: 1275791799}
@@ -4594,7 +4598,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538630152095, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_Constraints
-      value: 112
+      value: 122
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250588538630152095, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
+      propertyPath: m_Interpolate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250588538630152095, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538961091440, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_LocalPosition.y
