@@ -27,9 +27,9 @@ public class Coin : MonoBehaviour
 
     public void ChangeColorAlpha(float alpha)
     {
-        Color currentColor = meshRenderer.material.GetColor("_BaseColor");
-        Color newColor = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
-        meshRenderer.material.SetColor("_BaseColor", newColor);
+        // Color currentColor = meshRenderer.material.GetColor("_BaseColor");
+        // Color newColor = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
+        // meshRenderer.material.SetColor("_BaseColor", newColor);
     }
 
     public void CollideWithPlayer()
