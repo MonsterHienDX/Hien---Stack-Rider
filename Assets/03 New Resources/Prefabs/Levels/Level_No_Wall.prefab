@@ -104,6 +104,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinAmount: 1
   rotateSpeed: 5
+  lastShown: 0
+  floatingDuration: 0
+  isCollected: 0
+  meshRenderer: {fileID: 0}
 --- !u!1 &5056614363661777804
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +168,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinAmount: 1
   rotateSpeed: 5
+  lastShown: 0
+  floatingDuration: 0
+  isCollected: 0
+  meshRenderer: {fileID: 0}
 --- !u!1 &5056614364427561051
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +232,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinAmount: 1
   rotateSpeed: 5
+  lastShown: 0
+  floatingDuration: 0
+  isCollected: 0
+  meshRenderer: {fileID: 0}
 --- !u!1 &5056614364705126240
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +296,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinAmount: 1
   rotateSpeed: 5
+  lastShown: 0
+  floatingDuration: 0
+  isCollected: 0
+  meshRenderer: {fileID: 0}
 --- !u!1 &5056614365715023381
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +360,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinAmount: 1
   rotateSpeed: 5
+  lastShown: 0
+  floatingDuration: 0
+  isCollected: 0
+  meshRenderer: {fileID: 0}
 --- !u!1 &5481582383137261658
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,7 +824,7 @@ MonoBehaviour:
   ballMapContainer: {fileID: 7608437841685079783}
   wallMapContainer: {fileID: 7608437841825511212}
   coinMapContainer: {fileID: 7608437841492332660}
-  scaleRateSpeed: 3
+  scaleRateSpeed: 1
 --- !u!1 &7608437840227257312
 GameObject:
   m_ObjectHideFlags: 0
