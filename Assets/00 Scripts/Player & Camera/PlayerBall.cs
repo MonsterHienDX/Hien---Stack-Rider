@@ -62,7 +62,7 @@ public class PlayerBall : MonoBehaviour
         if (isStop) return;
         if (transform.position.z > endPoint.position.z)
         {
-            transform.Translate(endPoint.position * Time.deltaTime * speed);
+            transform.Translate(endPoint.position.normalized * Time.deltaTime * speed);
             BallRotateAnim(ballsCollected.Count % 2 == 1);
         }
         else
@@ -340,9 +340,8 @@ public class PlayerBall : MonoBehaviour
             GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 70, .5f);
 
             AudioManager.instance.PlayAudio(AudioName.ballBreak);
+            Vibrator.Vibrate(Constant.STRONG_VIBRATE);
 
-
-            // ____Play FX ball explode____
         }
         yield return new WaitForSeconds(delay);
 
@@ -354,6 +353,7 @@ public class PlayerBall : MonoBehaviour
 
         FXManager.instance.Play(transform.position, meshGO.GetComponent<MeshRenderer>().material);
         AudioManager.instance.PlayAudio(AudioName.ballBreak);
+        Vibrator.Vibrate(Constant.STRONG_VIBRATE);
 
         this.meshGO.SetActive(false);
         sphereCollider.enabled = false;

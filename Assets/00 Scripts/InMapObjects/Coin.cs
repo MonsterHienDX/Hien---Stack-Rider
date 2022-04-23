@@ -34,9 +34,9 @@ public class Coin : MonoBehaviour
 
     public void CollideWithPlayer()
     {
+        boxCollider.enabled = false;
         isCollected = true;
         lastShown = Time.time;
-        boxCollider.enabled = false;
     }
 
     public void UpdateFloatingCoin()

@@ -697,7 +697,7 @@ MonoBehaviour:
   ballMapContainer: {fileID: 7608437841685079783}
   wallMapContainer: {fileID: 7608437841825511212}
   coinMapContainer: {fileID: 7608437841492332660}
-  scaleRateSpeed: 1.5
+  scaleRateSpeed: 1
 --- !u!1 &7608437840227257312
 GameObject:
   m_ObjectHideFlags: 0
