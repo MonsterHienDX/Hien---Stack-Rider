@@ -34,14 +34,7 @@ public class FXManager : MonoBehaviour
     }
     public void Play(Vector3 position, Material material)
     {
-        // StartCoroutine(ExampleCoroutine(position, color, withConfetti, wait_time));
         ShowFX(position, material);
-        // Debug.LogWarning("PlayerFX");
-    }
-
-    private void Update()
-    {
-        // Play(PlayerBall.instance.transform.position, Color.red, false, .5f);
     }
 
     void ShowFX(Vector3 position, Material material = null)
@@ -55,16 +48,6 @@ public class FXManager : MonoBehaviour
         _FX_Break.CanUse = false;
 
     }
-
-    // IEnumerator ExampleCoroutine(Vector3 position, Color color, bool withConfetti, float wait_time)
-    // {
-    //     yield return new WaitForSeconds(wait_time);
-    //     FX_Break FX_Break = this.GetFX();
-    //     FX_Break.SetColor(color);
-    //     FX_Break.transform.position = position;
-    //     FX_Break.gameObject.SetActive(value: true);
-    //     FX_Break.CanUse = false;
-    // }
 
     private FX_Break GetFX()
     {

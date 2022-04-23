@@ -151,49 +151,49 @@ public class PlayerBall : MonoBehaviour
         }
     }
 
-    // private void OnTriggerEnter(Collider coll)
-    // {
-    //     if (coll.gameObject.tag == "Ball")
-    //     {
-    //         Ball ballCollision = coll.gameObject.GetComponent<Ball>();
-    //         if (!ballCollision.isCollected)
-    //             CollectBall(ballCollision);
-    //     }
+    private void OnTriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.tag == "Ball")
+        {
+            Ball ballCollision = coll.gameObject.GetComponent<Ball>();
+            if (!ballCollision.isCollected)
+                CollectBall(ballCollision);
+        }
 
-    //     else if (coll.gameObject.tag == "Wall")
-    //     {
-    //         Wall wallCollision = coll.gameObject.GetComponent<Wall>();
-    //         if (ballsCollected.Count > 0 && !wallCollision.isCollided)
-    //         {
-    //             LoseBall();
-    //             wallCollision.isCollided = true;
-    //         }
-    //         else
-    //         {
-    //             GameManager.instance.EndLevel(false);
-    //         }
-    //     }
+        else if (coll.gameObject.tag == "Wall")
+        {
+            Wall wallCollision = coll.gameObject.GetComponent<Wall>();
+            if (ballsCollected.Count > 0 && !wallCollision.isCollided)
+            {
+                LoseBall();
+                wallCollision.isCollided = true;
+            }
+            else
+            {
+                GameManager.instance.EndLevel(false);
+            }
+        }
 
-    //     else if (coll.gameObject.tag == "Coin")
-    //     {
-    //         Coin coin = coll.gameObject.GetComponent<Coin>();
-    //         CollectCoin(coin.coinAmount);
-    //         coll.gameObject.SetActive(false);
-    //         AudioManager.instance.PlayAudio(AudioName.coinCollected);
-    //     }
+        else if (coll.gameObject.tag == "Coin")
+        {
+            Coin coin = coll.gameObject.GetComponent<Coin>();
+            CollectCoin(coin.coinAmount);
+            coll.gameObject.SetActive(false);
+            AudioManager.instance.PlayAudio(AudioName.coinCollected);
+        }
 
-    //     else if (coll.gameObject.tag == "Lava")
-    //     {
-    //         if (ballsCollected.Count > 0)
-    //         {
-    //             LoseBallByLava();
-    //         }
-    //         else
-    //         {
-    //             GameManager.instance.EndLevel(false);
-    //         }
-    //     }
-    // }
+        else if (coll.gameObject.tag == "Lava")
+        {
+            if (ballsCollected.Count > 0)
+            {
+                LoseBallByLava();
+            }
+            else
+            {
+                GameManager.instance.EndLevel(false);
+            }
+        }
+    }
 
     private void PostEventUpdateBall(int state)
     {
