@@ -282,9 +282,7 @@ public class PlayerBall : MonoBehaviour
     public void StopMove()
     {
         this.speed = 0;
-        smokeFX.GetComponentInChildren<ParticleSystem>().Pause();
         smokeFX.SetActive(false);
-        // smokeFX.GetComponentInChildren<ParticleSystem>().Pause();
         isStop = true;
 
     }
@@ -293,7 +291,6 @@ public class PlayerBall : MonoBehaviour
     {
         this.speed = canConfigSpeed * scaleRateSpeed;
         smokeFX.SetActive(true);
-        smokeFX.GetComponentInChildren<ParticleSystem>().Play();
         isStop = false;
         SetSmokeFXPosition();
     }
