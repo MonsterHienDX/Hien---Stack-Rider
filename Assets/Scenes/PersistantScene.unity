@@ -792,6 +792,7 @@ MonoBehaviour:
   - {fileID: 7608437840169154921, guid: cb77644aff5e3984ba77a2d5cec7d3f3, type: 3}
   - {fileID: 7608437840169154921, guid: dcbe4d9bee603d941a5a52ff11c2e3a0, type: 3}
   - {fileID: 7608437840169154921, guid: d2d1d20ea17fd014f96c483aa6f0224c, type: 3}
+  - {fileID: 7608437840169154921, guid: 5d077c9880fd514419d334f1b745d9ad, type: 3}
   levelRoot: {fileID: 1471377825}
   endGamePanelManager: {fileID: 670539872}
   floatingTextManager: {fileID: 1275791799}
@@ -2503,6 +2504,7 @@ MonoBehaviour:
   ballBreak: {fileID: 8300000, guid: a8cdc12c2d8069f4fbcf3585ead77475, type: 3}
   coinCollected: {fileID: 8300000, guid: fe9f04f5bf70ac247b100bb87247fbc6, type: 3}
   congratulation: {fileID: 8300000, guid: 8a3d156d48aeed64f83134a74758b756, type: 3}
+  lavaBurn: {fileID: 8300000, guid: c9e94246cc6b69c41aea8062ebaeebeb, type: 3}
 --- !u!4 &1264074879 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3250588538630152093, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}

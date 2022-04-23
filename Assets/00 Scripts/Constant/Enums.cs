@@ -5,4 +5,5 @@ public enum AudioName
     ballBreak,
     coinCollected,
     congratulation,
+    lavaBurn,
 }

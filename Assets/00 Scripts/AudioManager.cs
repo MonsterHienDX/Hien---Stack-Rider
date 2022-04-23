@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip ballBreak;
     public AudioClip coinCollected;
     public AudioClip congratulation;
+    public AudioClip lavaBurn;
 
     public static AudioManager instance;
     private AudioSource audioSource;
@@ -41,8 +42,10 @@ public class AudioManager : MonoBehaviour
                 audioSource.clip = congratulation;
                 audioSource.Play();
                 break;
-
-
+            case AudioName.lavaBurn:
+                audioSource.clip = lavaBurn;
+                audioSource.Play();
+                break;
             default:
                 break;
         }

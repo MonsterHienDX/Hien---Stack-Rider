@@ -187,6 +187,8 @@ public class PlayerBall : MonoBehaviour
             if (ballsCollected.Count > 0)
             {
                 LoseBallByLava();
+                AudioManager.instance.PlayAudio(AudioName.lavaBurn);
+
             }
             else
             {
