@@ -337,7 +337,7 @@ public class PlayerBall : MonoBehaviour
             CollectCoin(coinCount);
 
             showTextPos = new Vector3(-0.85f, 1f, this.transform.position.z);
-            GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 60, .5f);
+            GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 70, .5f);
 
             AudioManager.instance.PlayAudio(AudioName.ballBreak);
 
@@ -350,7 +350,7 @@ public class PlayerBall : MonoBehaviour
         CollectCoin(coinCount);
 
         showTextPos = new Vector3(-0.85f, 1f, this.transform.position.z);
-        GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 60, .5f);
+        GameManager.instance.ShowFloatingText(($"+" + coinCount), 60, Color.yellow, showTextPos, Vector3.up * 70, .5f);
 
         FXManager.instance.Play(transform.position, meshGO.GetComponent<MeshRenderer>().material);
         AudioManager.instance.PlayAudio(AudioName.ballBreak);

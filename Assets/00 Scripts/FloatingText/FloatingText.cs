@@ -38,7 +38,7 @@ public class FloatingText
         }
 
         go.transform.position += motion * Time.deltaTime;
-        canvasGroup.alpha -= Time.deltaTime;
+        canvasGroup.alpha -= Time.deltaTime * 5;
     }
 
 }
