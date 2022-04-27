@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1815452, g: 0.22718838, b: 0.30740565, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154535, g: 0.22718859, b: 0.30740607, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1141,6 +1141,7 @@ GameObject:
   - component: {fileID: 508100340}
   - component: {fileID: 508100343}
   - component: {fileID: 508100344}
+  - component: {fileID: 508100345}
   m_Layer: 5
   m_Name: Skip level
   m_TagString: Untagged
@@ -1282,6 +1283,21 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &508100345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508100338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8906b44480cd05a4f83b897bba87b21f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showAdButton: {fileID: 508100340}
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
 --- !u!1 &562507394
 GameObject:
   m_ObjectHideFlags: 0
@@ -2730,6 +2746,7 @@ GameObject:
   - component: {fileID: 1363618410}
   - component: {fileID: 1363618413}
   - component: {fileID: 1363618414}
+  - component: {fileID: 1363618415}
   m_Layer: 5
   m_Name: x2Coins
   m_TagString: Untagged
@@ -2871,6 +2888,21 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1363618415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363618408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8906b44480cd05a4f83b897bba87b21f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showAdButton: {fileID: 1363618410}
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
 --- !u!1 &1388478888
 GameObject:
   m_ObjectHideFlags: 0
@@ -3869,7 +3901,10 @@ MonoBehaviour:
   _androidGameId: 4727278
   _iOSGameId: 4727279
   _testMode: 1
-  rewardedAdsButton: {fileID: 2100843214}
+  rewardedAdsButtonList:
+  - {fileID: 508100345}
+  - {fileID: 1363618415}
+  - {fileID: 2100843214}
 --- !u!4 &1944951537
 Transform:
   m_ObjectHideFlags: 0
@@ -5060,7 +5095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538630152092, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: ballRotateRateSpeed
-      value: 150
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3250588538630152093, guid: 6aa5626fec4c4ad49a99a2cd48fee0d6, type: 3}
       propertyPath: m_RootOrder

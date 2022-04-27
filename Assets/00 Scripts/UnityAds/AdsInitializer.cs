@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -6,7 +7,7 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     [SerializeField] string _androidGameId;
     [SerializeField] string _iOSGameId;
     [SerializeField] bool _testMode = true;
-    [SerializeField] RewardedAdsButton rewardedAdsButton;
+    [SerializeField] List<RewardedAdsButton> rewardedAdsButtonList;
     private string _gameId;
 
     void Awake()
@@ -27,7 +28,10 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     public void OnInitializationComplete()
     {
         Debug.Log("Unity Ads initialization complete.");
-        rewardedAdsButton.LoadAd();
+        foreach (RewardedAdsButton rad in rewardedAdsButtonList)
+        {
+            rad.LoadAd();
+        }
 
     }
 

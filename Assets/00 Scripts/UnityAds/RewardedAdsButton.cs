@@ -17,6 +17,10 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
 #elif UNITY_ANDROID
         _adUnitId = _androidAdUnitId;
 #endif
+        if (_showAdButton == null)
+        {
+            _showAdButton = GetComponent<Button>();
+        }
 
         //Disable the button until the ad is ready to show:
         _showAdButton.interactable = false;
